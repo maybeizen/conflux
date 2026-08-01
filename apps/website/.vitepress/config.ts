@@ -1,3 +1,7 @@
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
 import type { DefaultTheme } from "vitepress";
 import { defineConfig } from "vitepress";
 
@@ -79,14 +83,28 @@ const search =
 const GITHUB_URL = "https://github.com/maybeizen/conflux";
 const FLUXER_SERVER_URL = "https://fluxer.app/invite/REPLACE_ME";
 
+const websiteRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+function usesCustomDomain(): boolean {
+  const cnamePath = join(websiteRoot, "public", "CNAME");
+  if (!existsSync(cnamePath)) {
+    return false;
+  }
+  return readFileSync(cnamePath, "utf8").trim().length > 0;
+}
+
+function normalizeBasePath(value: string): string {
+  return value.endsWith("/") ? value : `${value}/`;
+}
+
 const githubRepoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "conflux";
 const vitepressBase = process.env.VITEPRESS_BASE?.trim();
 const base = vitepressBase
-  ? vitepressBase.endsWith("/")
-    ? vitepressBase
-    : `${vitepressBase}/`
+  ? normalizeBasePath(vitepressBase)
   : process.env.GITHUB_ACTIONS === "true"
-    ? `/${githubRepoName}/`
+    ? usesCustomDomain()
+      ? "/"
+      : normalizeBasePath(`/${githubRepoName}`)
     : "/";
 
 export default defineConfig({
