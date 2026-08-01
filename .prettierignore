@@ -5,6 +5,5 @@ dist
 **/.vitepress/dist
 **/.vitepress/cache
 apps/website/api
-apps/test-bot/dist
 bun.lock
 coverage
