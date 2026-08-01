@@ -31,8 +31,8 @@ jobs:
 
       - name: Publish @confluxjs/conflux
         working-directory: packages/conflux
-        run: npm publish --access public --provenance
+        run: npm publish --access public --provenance --skip-published
 
       - name: Publish @confluxjs/create-conflux
         working-directory: packages/create-conflux
-        run: npm publish --access public --provenance
+        run: npm publish --access public --provenance --skip-published
