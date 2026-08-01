@@ -6,9 +6,13 @@ Scaffold a new Conflux bot project.
 
 ```bash
 bunx create-conflux
+# npm: npm create @confluxjs/create-conflux@latest
+# pnpm: pnpm create @confluxjs/create-conflux
 ```
 
-Follow the prompts to pick a directory and package name. The default template lives under `templates/default`.
+## Publishing (maintainers)
+
+Build and publish from the monorepo root (see [root README](../../README.md#publishing) or `packages/conflux/README.md`). This package is published as `@confluxjs/create-conflux`.
 
 ## Scripts
 

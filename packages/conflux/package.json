@@ -1,6 +1,23 @@
 {
   "name": "@confluxjs/conflux",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Conflux bot framework CLI and runtime for Fluxer",
+  "keywords": [
+    "conflux",
+    "fluxer",
+    "bot",
+    "typescript",
+    "cli",
+    "framework"
+  ],
+  "homepage": "https://conflux.js.org",
+  "bugs": "https://github.com/confluxjs/conflux.js/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/confluxjs/conflux.js.git",
+    "directory": "packages/conflux"
+  },
+  "license": "MIT",
   "sideEffects": [
     "./dist/cli.js",
     "./dist/cli.cjs",
@@ -12,34 +29,42 @@
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
     "./cli": {
+      "types": "./dist/cli.d.ts",
       "import": "./dist/cli.js",
       "require": "./dist/cli.cjs"
     },
     "./commands": {
+      "types": "./dist/commands.d.ts",
       "import": "./dist/commands.js",
       "require": "./dist/commands.cjs"
     },
     "./config": {
+      "types": "./dist/config.d.ts",
       "import": "./dist/config.js",
       "require": "./dist/config.cjs"
     },
     "./dev-runner": {
+      "types": "./dist/dev-runner.d.ts",
       "import": "./dist/dev-runner.js",
       "require": "./dist/dev-runner.cjs"
     },
     "./events": {
+      "types": "./dist/events.d.ts",
       "import": "./dist/events.js",
       "require": "./dist/events.cjs"
     },
     "./runtime": {
+      "types": "./dist/runtime.d.ts",
       "import": "./dist/runtime.js",
       "require": "./dist/runtime.cjs"
     },
     "./start": {
+      "types": "./dist/start.d.ts",
       "import": "./dist/start.js",
       "require": "./dist/start.cjs"
     },
@@ -47,19 +72,21 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.cts",
+  "types": "./dist/index.d.ts",
   "bin": {
     "conflux": "./dist/cli.cjs"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "tsdown",
     "check-types": "tsc -p tsconfig.json --noEmit",
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "dev": "tsdown --watch",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "prepublishOnly": "bun run build"
   },
   "devDependencies": {
     "@confluxjs/tsconfig": "workspace:*",
@@ -69,6 +96,12 @@
     "typescript": "catalog:build"
   },
   "peerDependencies": {
-    "@fluxerjs/core": "catalog:"
+    "@fluxerjs/core": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

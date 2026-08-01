@@ -8,7 +8,7 @@ description: conflux.config.ts, paths, and token resolution
 Conflux reads `conflux.config.ts` at the project root (or the path you pass to the CLI). Use `defineConfig` for typed defaults.
 
 ```ts
-import { defineConfig } from "@confluxjs/conflux/config";
+import { defineConfig } from "@confluxjs/conflux";
 
 export default defineConfig({
   outDir: "dist",

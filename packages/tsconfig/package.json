@@ -1,14 +1,36 @@
 {
   "name": "@confluxjs/tsconfig",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "description": "Shared TypeScript configs for Conflux.js projects",
+  "keywords": [
+    "conflux",
+    "typescript",
+    "tsconfig"
+  ],
+  "homepage": "https://conflux.js.org",
+  "bugs": "https://github.com/confluxjs/conflux.js/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/confluxjs/conflux.js.git",
+    "directory": "packages/tsconfig"
+  },
+  "license": "MIT",
   "exports": {
     "./base.json": "./base.json",
     "./library.json": "./library.json",
     "./node.json": "./node.json"
   },
+  "files": [
+    "base.json",
+    "library.json",
+    "node.json",
+    "README.md"
+  ],
   "scripts": {
     "check-types": "node -e \"process.exit(0)\"",
     "lint": "node -e \"process.exit(0)\""
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

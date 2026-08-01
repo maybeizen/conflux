@@ -5,7 +5,7 @@ export default defineConfig({
   format: ["esm", "cjs"],
   platform: "node",
   dts: { cjsReexport: true },
-  exports: true,
+  exports: false,
   clean: true,
   sourcemap: true,
 });

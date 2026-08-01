@@ -31,7 +31,7 @@ src/
 ## Configuration file
 
 ```ts
-import { defineConfig } from "@confluxjs/conflux/config";
+import { defineConfig } from "@confluxjs/conflux";
 
 export default defineConfig({
   outDir: "dist",
