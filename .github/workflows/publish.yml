@@ -27,11 +27,11 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build publishable packages
-        run: bun run build --filter=@confluxjs/tsconfig --filter=@confluxjs/conflux --filter=@confluxjs/create-conflux
+        run: bun run build --filter=@confluxjs/conflux --filter=@confluxjs/create-conflux
 
-      - name: Publish @confluxjs/tsconfig
-        working-directory: packages/tsconfig
-        run: npm publish --access public --provenance
+      # - name: Publish @confluxjs/tsconfig
+      #   working-directory: packages/tsconfig
+      #   run: npm publish --access public --provenance
 
       - name: Publish @confluxjs/conflux
         working-directory: packages/conflux

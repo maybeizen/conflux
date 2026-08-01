@@ -1,6 +1,7 @@
 {
   "name": "@confluxjs/tsconfig",
   "version": "0.1.2",
+  "private": "true",
   "description": "Shared TypeScript configs for Conflux.js projects",
   "keywords": [
     "conflux",
