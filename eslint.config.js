@@ -8,7 +8,6 @@ import vueParser from "vue-eslint-parser";
 const tsFiles = [
   "packages/conflux/**/*.ts",
   "packages/create-conflux/**/*.ts",
-  "apps/test-bot/**/*.ts",
   "scripts/**/*.ts",
   "apps/website/.vitepress/**/*.ts",
 ];
@@ -22,7 +21,6 @@ export default tseslint.config(
       "apps/website/api/**",
       "**/node_modules/**",
       "**/.turbo/**",
-      "apps/test-bot/dist/**",
       "**/.conflux/**",
       "packages/conflux/dist/**",
       "packages/create-conflux/dist/**",

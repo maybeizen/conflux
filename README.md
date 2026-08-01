@@ -16,7 +16,6 @@ This repository is under active development. Published npm versions and the publ
 | [`packages/create-conflux`](packages/create-conflux) | `create-conflux` scaffolder (template in `templates/default`)            |
 | [`packages/tsconfig`](packages/tsconfig)             | Shared `extends` configs for workspaces                                  |
 | [`apps/website`](apps/website)                       | VitePress docs (guides, API reference, contributing)                     |
-| [`apps/test-bot`](apps/test-bot)                     | Internal sample bot used to exercise the framework                       |
 
 ## Development
 
@@ -47,12 +46,6 @@ Local docs dev server (run `docgen` first if API pages are missing):
 ```bash
 bun run docgen
 bun run --filter website dev
-```
-
-Run the reference bot (requires `apps/test-bot/.env` with your bot token):
-
-```bash
-bun run --filter test-bot dev
 ```
 
 ## Using the framework in another project
