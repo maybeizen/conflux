@@ -1,6 +1,6 @@
 # Conflux.js
 
-Monorepo for [Conflux.js](https://conflux.js.org) — a framework for building Discord bots on [Fluxer](https://fluxer.dev) with `@fluxerjs/core`.
+Monorepo for [Conflux.js](https://conflux.js.org) — a framework for building bots on [Fluxer](https://fluxer.dev) with `@fluxerjs/core`.
 
 ## Requirements
 
