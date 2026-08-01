@@ -15,7 +15,6 @@ This repository is under active development. Published npm versions and the publ
 | ---------------------------------------------------- | ------------------------------------------------------------------------ |
 | [`packages/conflux`](packages/conflux)               | `@confluxjs/conflux` — CLI (`conflux dev`, `build`, `start`) and runtime |
 | [`packages/create-conflux`](packages/create-conflux) | `create-conflux` scaffolder (template in `templates/default`)            |
-| [`packages/tsconfig`](packages/tsconfig)             | Shared `extends` configs for workspaces                                  |
 | [`apps/website`](apps/website)                       | VitePress docs (guides, API reference, contributing)                     |
 
 ## Development
