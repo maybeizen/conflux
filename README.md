@@ -7,6 +7,7 @@ This repository is under active development. Published npm versions and the publ
 ## Requirements
 
 - [Bun](https://bun.sh) **1.3.9** (or your package manager of choice, really)
+- [Fluxer.js Core](https://fluxer.js.org)
 
 ## Repository layout
 
