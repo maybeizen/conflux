@@ -13,10 +13,10 @@ Middleware only runs when a message becomes a **matched command**: valid prefix,
 
 Conflux discovers three kinds of middleware files under `commandsDir`. All use the `+` filename convention so they are not treated as commands.
 
-| Type        | Filename pattern              | Scope |
-| ----------- | ----------------------------- | ----- |
-| Global      | `+global-middleware.ts`       | Every command under `commandsDir` |
-| Directory   | `+middleware.ts`              | Commands in that folder and all nested subfolders |
+| Type        | Filename pattern             | Scope                                                     |
+| ----------- | ---------------------------- | --------------------------------------------------------- |
+| Global      | `+global-middleware.ts`      | Every command under `commandsDir`                         |
+| Directory   | `+middleware.ts`             | Commands in that folder and all nested subfolders         |
 | Per-command | `+<data.name>.middleware.ts` | One command, matched by `data.name` in the same directory |
 
 ### Global middleware
@@ -88,7 +88,7 @@ export default middleware;
 Named export is also supported:
 
 ```ts
-export const middleware: CommandMiddleware = { /* ... */ };
+export const middleware: CommandMiddleware = {/* ... */};
 ```
 
 If the export is missing, not an object, or either hook is not a function, loading fails with an error that includes the file path.
@@ -134,10 +134,10 @@ Use `ctx` in `beforeExecute` to attach state on side channels (module-level maps
 
 ## Command `after` vs middleware
 
-| Mechanism              | Defined in              | Runs when                    |
-| ---------------------- | ----------------------- | ---------------------------- |
-| `after` on command     | Command module          | After `message`, before middleware `afterExecute` |
-| `afterExecute`         | Middleware modules      | After command `after`, in reverse chain order |
+| Mechanism          | Defined in         | Runs when                                         |
+| ------------------ | ------------------ | ------------------------------------------------- |
+| `after` on command | Command module     | After `message`, before middleware `afterExecute` |
+| `afterExecute`     | Middleware modules | After command `after`, in reverse chain order     |
 
 Prefer command `after` for logic tied to one handler. Prefer middleware `afterExecute` for shared teardown in a directory or globally.
 

@@ -43,11 +43,11 @@ Load variables from `.env` automatically in dev and start.
 
 The `prefix` option controls which message prefixes trigger [prefix commands](/guides/commands#command-prefix).
 
-| Value              | Resolved behavior                          |
-| ------------------ | ------------------------------------------ |
-| Omitted            | `["!"]`                                    |
-| `string`           | Single prefix, for example `["!"]`         |
-| `string[]`         | Multiple prefixes, tried in array order    |
+| Value      | Resolved behavior                       |
+| ---------- | --------------------------------------- |
+| Omitted    | `["!"]`                                 |
+| `string`   | Single prefix, for example `["!"]`      |
+| `string[]` | Multiple prefixes, tried in array order |
 
 ```ts
 export default defineConfig({
