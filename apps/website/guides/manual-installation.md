@@ -10,7 +10,7 @@ Use this path when you are not using `create-conflux` or you are wiring Conflux 
 ## Dependencies
 
 <PackageManagerSwitcher
-  defaultManager="bun"
+  defaultManager="pnpm"
   npm="npm add @confluxjs/conflux @fluxerjs/core\nnpm add -D @types/node typescript"
   pnpm="pnpm add @confluxjs/conflux @fluxerjs/core\npnpm add -D @types/node typescript"
   yarn="yarn add @confluxjs/conflux @fluxerjs/core\nyarn add -D @types/node typescript"
@@ -111,7 +111,7 @@ Add to `package.json`:
 ```
 
 <PackageManagerSwitcher
-  defaultManager="bun"
+  defaultManager="pnpm"
   npm="npm run dev"
   pnpm="pnpm dev"
   yarn="yarn dev"
