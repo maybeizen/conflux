@@ -24,7 +24,7 @@ function passesGuildFilter(message: Message, guilds: string[] | undefined): bool
     return true;
   }
   if (!message.guildId) {
-    return true;
+    return false;
   }
   return guilds.includes(message.guildId);
 }
