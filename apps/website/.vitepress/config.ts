@@ -80,6 +80,7 @@ const GITHUB_URL = "https://github.com/maybeizen/confluxjs";
 const FLUXER_SERVER_URL = "https://fluxer.app/invite/REPLACE_ME";
 
 export default defineConfig({
+  base: process.env.NODE_ENV === "production" ? "/conflux/" : "/",
   title: "Conflux.js",
   description: "Meta-framework for Fluxer bots — guides and API reference.",
   appearance: "dark",
