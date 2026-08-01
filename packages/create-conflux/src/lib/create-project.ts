@@ -1,5 +1,5 @@
 import { constants } from "node:fs";
-import { access, readdir, rm } from "node:fs/promises";
+import { access, rm } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 
 import * as p from "@clack/prompts";
@@ -10,6 +10,13 @@ import {
   detectPackageManager,
   packageManagerRunCommand,
 } from "./detect-package-manager.js";
+import {
+  assessOverwriteRisk,
+  formatConflictSummary,
+  manualInstallationHint,
+  requiresOverwriteConfirmation,
+} from "./overwrite-risk.js";
+import { getDefaultTemplateRoot } from "./paths.js";
 import { runGitInit } from "./run-git-init.js";
 import { runInstall } from "./run-install.js";
 import { scaffoldTemplate } from "./scaffold-template.js";
@@ -36,18 +43,10 @@ async function pathExists(path: string): Promise<boolean> {
   }
 }
 
-async function isDirectoryEmpty(dir: string): Promise<boolean> {
-  try {
-    const entries = await readdir(dir);
-    return entries.length === 0;
-  } catch {
-    return true;
-  }
-}
-
 export async function runCreateConflux(options: CreateConfluxOptions = {}): Promise<number> {
   const baseCwd = options.cwd ?? process.cwd();
   const packageManager = detectPackageManager(baseCwd);
+  const templateRoot = getDefaultTemplateRoot();
 
   p.intro(pc.bgCyan(pc.black(" create-conflux ")));
 
@@ -73,23 +72,6 @@ export async function runCreateConflux(options: CreateConfluxOptions = {}): Prom
   if (!(await pathExists(parentDir))) {
     p.log.error(`Parent directory does not exist: ${parentDir}`);
     return 1;
-  }
-
-  if (await pathExists(targetDir)) {
-    if (!(await isDirectoryEmpty(targetDir))) {
-      const overwrite = await p.confirm({
-        message: `Directory is not empty. Overwrite files in ${pc.cyan(targetDir)}?`,
-        initialValue: false,
-      });
-      if (p.isCancel(overwrite)) {
-        p.cancel("Cancelled");
-        return 1;
-      }
-      if (!overwrite) {
-        p.cancel("Cancelled");
-        return 1;
-      }
-    }
   }
 
   let packageName = basename(targetDir);
@@ -124,6 +106,28 @@ export async function runCreateConflux(options: CreateConfluxOptions = {}): Prom
 
   const botToken = typeof tokenInput === "string" ? tokenInput.trim() : "";
 
+  const overwriteRisk = await assessOverwriteRisk(targetDir, templateRoot, {
+    writeEnv: Boolean(botToken),
+  });
+
+  if (requiresOverwriteConfirmation(overwriteRisk)) {
+    p.note(formatConflictSummary(overwriteRisk, targetDir), "Existing files");
+    const proceed = await p.confirm({
+      message: "Overwrite and continue scaffolding this directory?",
+      initialValue: false,
+    });
+    if (p.isCancel(proceed)) {
+      p.cancel("Cancelled");
+      p.log.info(manualInstallationHint());
+      return 1;
+    }
+    if (!proceed) {
+      p.cancel("Cancelled — no files were changed.");
+      p.log.info(manualInstallationHint());
+      return 1;
+    }
+  }
+
   const initGit = await p.confirm({
     message: "Initialize a Git repository?",
     initialValue: true,
@@ -145,7 +149,7 @@ export async function runCreateConflux(options: CreateConfluxOptions = {}): Prom
   }
 
   try {
-    if (await pathExists(targetDir)) {
+    if (overwriteRisk.targetExists && overwriteRisk.isNonEmpty) {
       await rm(targetDir, { recursive: true, force: true });
     }
 
