@@ -12,7 +12,7 @@
     "@fluxerjs/core": "^2.1.0"
   },
   "devDependencies": {
-    "@confluxjs/tsconfig": "latest",
+    "@types/node": "^22.0.0",
     "typescript": "^5.9.2"
   }
 }

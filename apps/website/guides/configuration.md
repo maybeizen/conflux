@@ -16,6 +16,7 @@ export default defineConfig({
   eventsDir: "src/events",
   commandsDir: "src/commands",
   env: "FLUXER_BOT_TOKEN",
+  prefix: "!",
 });
 ```
 
@@ -37,6 +38,30 @@ Load variables from `.env` automatically in dev and start.
 | `commandsDir` | `src/commands` | Prefix command modules        |
 | `eventsDir`   | `src/events`   | Event handler folders         |
 | `outDir`      | `dist`         | Production bundle output      |
+
+## Command prefix
+
+The `prefix` option controls which message prefixes trigger [prefix commands](/guides/commands#command-prefix).
+
+| Value      | Resolved behavior                       |
+| ---------- | --------------------------------------- |
+| Omitted    | `["!"]`                                 |
+| `string`   | Single prefix, for example `["!"]`      |
+| `string[]` | Multiple prefixes, tried in array order |
+
+```ts
+export default defineConfig({
+  prefix: "!",
+});
+
+export default defineConfig({
+  prefix: ["!", "?"],
+});
+```
+
+At runtime, Conflux loads config prefixes first, then runs optional `configure(conflux)` from your entry module. If `configure` calls `conflux.setPrefix()`, that resolver replaces the config value for the rest of the process lifetime.
+
+Use config for fixed prefixes. Use `setPrefix` when prefixes must be computed (dynamic lists, per-request logic, or async resolution). See [`PrefixResolver`](/api/type-aliases/prefixresolver) in the API reference.
 
 ## Dev vs production output
 

@@ -6,6 +6,7 @@ export type ConfluxUserConfig = {
   eventsDir?: string;
   token?: string;
   env?: string;
+  prefix?: string | string[];
 };
 
 export type ResolvedConfluxConfig = {
@@ -16,6 +17,7 @@ export type ResolvedConfluxConfig = {
   eventsDir: string;
   token?: string;
   env?: string;
+  prefix: string[];
 };
 
 export type ConfluxOptions = {

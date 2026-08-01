@@ -11,11 +11,39 @@ Use this path when you are not using `create-conflux` or you are wiring Conflux 
 
 <PackageManagerSwitcher
   defaultManager="bun"
-  npm="npm add @confluxjs/conflux @fluxerjs/core\nnpm add -D @confluxjs/tsconfig typescript"
-  pnpm="pnpm add @confluxjs/conflux @fluxerjs/core\npnpm add -D @confluxjs/tsconfig typescript"
-  yarn="yarn add @confluxjs/conflux @fluxerjs/core\nyarn add -D @confluxjs/tsconfig typescript"
-  bun="bun add @confluxjs/conflux @fluxerjs/core\nbun add -d @confluxjs/tsconfig typescript"
+  npm="npm add @confluxjs/conflux @fluxerjs/core\nnpm add -D @types/node typescript"
+  pnpm="pnpm add @confluxjs/conflux @fluxerjs/core\npnpm add -D @types/node typescript"
+  yarn="yarn add @confluxjs/conflux @fluxerjs/core\nyarn add -D @types/node typescript"
+  bun="bun add @confluxjs/conflux @fluxerjs/core\nbun add -d @types/node typescript"
 />
+
+Install **`typescript`** for editor checking and **`@types/node`** for Node globals (`process`, `import.meta`, and so on). Conflux bundles your bot; you do not need a separate TypeScript emit step for production.
+
+## TypeScript
+
+Add a `tsconfig.json` at the project root. This baseline works with Conflux defaults:
+
+```json
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "target": "ES2022",
+    "module": "ESNext",
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "allowJs": true,
+    "noEmit": true,
+    "rootDir": "."
+  },
+  "include": ["src", "conflux.config.ts"]
+}
+```
 
 ## Project layout
 
@@ -60,16 +88,13 @@ Never commit `.env` or bot tokens to version control. Use your host’s secret m
 
 ```ts
 import { Client } from "@fluxerjs/core";
-import type { Conflux } from "@confluxjs/conflux";
 
 const client = new Client({ intents: 0 });
 
-export async function configure(conflux: Conflux) {
-  conflux.setPrefix(async () => ["!"]);
-}
-
 export { client };
 ```
+
+Configure prefixes in `conflux.config.ts` with `prefix: "!"` or `prefix: ["!", "?"]`.
 
 ## Scripts
 
