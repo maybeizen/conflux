@@ -6,10 +6,7 @@ import * as p from "@clack/prompts";
 import pc from "picocolors";
 import validatePackageName from "validate-npm-package-name";
 
-import {
-  detectPackageManager,
-  packageManagerRunCommand,
-} from "./detect-package-manager.js";
+import { detectPackageManager, packageManagerRunCommand } from "./detect-package-manager.js";
 import {
   assessOverwriteRisk,
   formatConflictSummary,
@@ -205,6 +202,8 @@ export async function runCreateConflux(options: CreateConfluxOptions = {}): Prom
     packageManagerRunCommand(packageManager),
   ];
 
-  p.outro(`${pc.green("Project created!")}\n\n${nextSteps.map((step) => `  ${pc.cyan(step)}`).join("\n")}`);
+  p.outro(
+    `${pc.green("Project created!")}\n\n${nextSteps.map((step) => `  ${pc.cyan(step)}`).join("\n")}`,
+  );
   return 0;
 }

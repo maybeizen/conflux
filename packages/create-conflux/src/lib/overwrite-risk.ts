@@ -80,11 +80,7 @@ async function directoryIsEmpty(dir: string): Promise<boolean> {
 }
 
 export function requiresOverwriteConfirmation(risk: OverwriteRisk): boolean {
-  return (
-    risk.isNonEmpty ||
-    risk.conflictingPaths.length > 0 ||
-    risk.willOverwriteEnv
-  );
+  return risk.isNonEmpty || risk.conflictingPaths.length > 0 || risk.willOverwriteEnv;
 }
 
 const MANUAL_INSTALL_URL = "https://conflux.js.org/guides/manual-installation";

@@ -47,12 +47,7 @@ function detectFromPath(): PackageManager | undefined {
 }
 
 export function detectPackageManager(cwd: string = process.cwd()): PackageManager {
-  return (
-    detectFromUserAgent() ??
-    detectFromLockfiles(cwd) ??
-    detectFromPath() ??
-    "npm"
-  );
+  return detectFromUserAgent() ?? detectFromLockfiles(cwd) ?? detectFromPath() ?? "npm";
 }
 
 export function packageManagerRunCommand(pm: PackageManager): string {
