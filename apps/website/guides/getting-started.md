@@ -8,17 +8,18 @@ description: Create a Conflux bot and run it locally
 ## Create a project
 
 <PackageManagerSwitcher
-  defaultManager="bun"
-  npm="npm create @confluxjs/create-conflux@latest my-bot"
-  pnpm="pnpm create @confluxjs/create-conflux my-bot"
-  yarn="yarn create @confluxjs/create-conflux my-bot"
-  bun="bunx create-conflux my-bot"
+  defaultManager="pnpm"
+  npm="npm create @confluxjs/create-conflux@latest"
+  pnpm="pnpm create @confluxjs/create-conflux"
+  yarn="yarn create @confluxjs/create-conflux"
+  bun="bunx @confluxjs/create-conflux"
 />
 
 ```bash
 cd my-bot
-cp .env.example .env
 ```
+
+The scaffolder can write `FLUXER_BOT_TOKEN` to `.env` when you paste your token, install dependencies, and run `git init`. If you skip the token, copy `.env.example` to `.env` and fill it in.
 
 ::: tip
 Set `FLUXER_BOT_TOKEN` in `.env` using a token from the [Fluxer developer portal](https://fluxer.js.org/guides/installation/).
@@ -27,7 +28,7 @@ Set `FLUXER_BOT_TOKEN` in `.env` using a token from the [Fluxer developer portal
 ## Run the bot
 
 <PackageManagerSwitcher
-  defaultManager="bun"
+  defaultManager="pnpm"
   npm="npm install\nnpm run dev"
   pnpm="pnpm install\npnpm dev"
   yarn="yarn install\nyarn dev"
