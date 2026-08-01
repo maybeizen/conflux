@@ -1,6 +1,6 @@
 {
   "name": "@confluxjs/conflux",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Conflux bot framework CLI and runtime for Fluxer",
   "keywords": [
     "conflux",
@@ -11,10 +11,10 @@
     "framework"
   ],
   "homepage": "https://conflux.js.org",
-  "bugs": "https://github.com/maybeizen/confluxjs/issues",
+  "bugs": "https://github.com/maybeizen/conflux/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maybeizen/confluxjs.git",
+    "url": "git+https://github.com/maybeizen/conflux.git",
     "directory": "packages/conflux"
   },
   "license": "MIT",

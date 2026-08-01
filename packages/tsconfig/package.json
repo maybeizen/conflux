@@ -1,6 +1,6 @@
 {
   "name": "@confluxjs/tsconfig",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Shared TypeScript configs for Conflux.js projects",
   "keywords": [
     "conflux",
@@ -8,10 +8,10 @@
     "tsconfig"
   ],
   "homepage": "https://conflux.js.org",
-  "bugs": "https://github.com/maybeizen/confluxjs/issues",
+  "bugs": "https://github.com/maybeizen/conflux/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maybeizen/confluxjs.git",
+    "url": "git+https://github.com/maybeizen/conflux.git",
     "directory": "packages/tsconfig"
   },
   "license": "MIT",
