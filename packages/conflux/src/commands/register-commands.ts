@@ -11,6 +11,10 @@ export function registerConfluxCommands(
   commandsDir: string,
 ): void {
   client.on("messageCreate", (message) => {
-    void dispatchPrefixCommand(message, client, conflux, registry, commandsDir);
+    void dispatchPrefixCommand(message, client, conflux, registry, commandsDir).catch(
+      (error: unknown) => {
+        void conflux.reportError(error, { scope: "command" });
+      },
+    );
   });
 }
