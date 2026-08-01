@@ -22,11 +22,11 @@ export default defineConfig({
 
 ## Token resolution
 
-| Option      | Behavior                                                  |
-| ----------- | --------------------------------------------------------- |
-| `token`     | Literal bot token string                                  |
-| `env`       | Name of an environment variable to read                   |
-| _(omitted)_ | Checks `FLUXER_BOT_TOKEN`, then `BOT_TOKEN`, then `TOKEN` |
+| Option      | Behavior                                                              |
+| ----------- | --------------------------------------------------------------------- |
+| `token`     | Literal bot token string                                              |
+| `env`       | Name of an environment variable to read                               |
+| _(omitted)_ | Checks `FLUXER_BOT_TOKEN`, then `CONFLUX_BOT_TOKEN`, then `BOT_TOKEN` |
 
 Load variables from `.env` automatically in dev and start.
 

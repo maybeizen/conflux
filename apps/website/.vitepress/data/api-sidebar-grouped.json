@@ -29,6 +29,10 @@
           "href": "/api/functions/createconflux"
         },
         {
+          "title": "Defaultconfluxerrorhandler",
+          "href": "/api/functions/defaultconfluxerrorhandler"
+        },
+        {
           "title": "Defineconfig",
           "href": "/api/functions/defineconfig"
         },
@@ -81,6 +85,18 @@
         {
           "title": "Confluxconfigure",
           "href": "/api/type-aliases/confluxconfigure"
+        },
+        {
+          "title": "Confluxerrorcontext",
+          "href": "/api/type-aliases/confluxerrorcontext"
+        },
+        {
+          "title": "Confluxerrorhandler",
+          "href": "/api/type-aliases/confluxerrorhandler"
+        },
+        {
+          "title": "Confluxerrorscope",
+          "href": "/api/type-aliases/confluxerrorscope"
         },
         {
           "title": "Confluxoptions",

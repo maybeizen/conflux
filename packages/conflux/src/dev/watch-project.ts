@@ -2,7 +2,7 @@ import { type ChildProcess, spawn } from "node:child_process";
 import { watch } from "node:fs";
 import { dirname } from "node:path";
 
-import { buildBotProject } from "../build/build-bot.js";
+import { buildBotProject, BuildFailedError } from "../build/build-bot.js";
 import { resolveBuiltConfig } from "../build/resolve-built-config.js";
 import { findConfigPath, loadConfluxConfig } from "../config/load-config.js";
 import { ensureDevBootstrap } from "./dev-bootstrap.js";
@@ -96,9 +96,14 @@ export async function runProjectDevWatch(root?: string): Promise<void> {
       const runnerPath = ensureDevBootstrap(projectRoot, built);
       startChild(runnerPath);
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : String(error);
-      console.error(message);
-      process.exitCode = 1;
+      if (error instanceof BuildFailedError) {
+        console.error(
+          `\n[conflux dev] Build failed (exit ${error.exitCode}). Fix the error above and save to retry.`,
+        );
+      } else {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(`\n[conflux dev] ${message}`);
+      }
     } finally {
       building = false;
       if (rebuildQueued) {
