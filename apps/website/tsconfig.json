@@ -1,0 +1,10 @@
+{
+  "extends": "@confluxjs/tsconfig/node.json",
+  "compilerOptions": {
+    "composite": true,
+    "jsx": "preserve",
+    "types": [],
+    "baseUrl": "."
+  },
+  "include": [".vitepress/**/*.ts", ".vitepress/**/*.vue", "env.d.ts"]
+}

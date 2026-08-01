@@ -1,0 +1,120 @@
+{
+  "groups": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "items": [
+        {
+          "title": "API Reference",
+          "href": "/api/"
+        }
+      ]
+    },
+    {
+      "id": "classes",
+      "title": "Classes",
+      "items": [
+        {
+          "title": "Conflux",
+          "href": "/api/classes/conflux"
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "items": [
+        {
+          "title": "Createconflux",
+          "href": "/api/functions/createconflux"
+        },
+        {
+          "title": "Defineconfig",
+          "href": "/api/functions/defineconfig"
+        },
+        {
+          "title": "Runconflux",
+          "href": "/api/functions/runconflux"
+        },
+        {
+          "title": "Stopallevents",
+          "href": "/api/functions/stopallevents"
+        }
+      ]
+    },
+    {
+      "id": "types",
+      "title": "Type aliases",
+      "items": [
+        {
+          "title": "Commandcontext",
+          "href": "/api/type-aliases/commandcontext"
+        },
+        {
+          "title": "Commanddata",
+          "href": "/api/type-aliases/commanddata"
+        },
+        {
+          "title": "Commandmetadata",
+          "href": "/api/type-aliases/commandmetadata"
+        },
+        {
+          "title": "Commandmiddleware",
+          "href": "/api/type-aliases/commandmiddleware"
+        },
+        {
+          "title": "Commandregistry",
+          "href": "/api/type-aliases/commandregistry"
+        },
+        {
+          "title": "Confluxconfigure",
+          "href": "/api/type-aliases/confluxconfigure"
+        },
+        {
+          "title": "Confluxoptions",
+          "href": "/api/type-aliases/confluxoptions"
+        },
+        {
+          "title": "Confluxuserconfig",
+          "href": "/api/type-aliases/confluxuserconfig"
+        },
+        {
+          "title": "Eventhandler",
+          "href": "/api/type-aliases/eventhandler"
+        },
+        {
+          "title": "Eventhandlercontext",
+          "href": "/api/type-aliases/eventhandlercontext"
+        },
+        {
+          "title": "Fluxerclienteventname",
+          "href": "/api/type-aliases/fluxerclienteventname"
+        },
+        {
+          "title": "Loadedcommand",
+          "href": "/api/type-aliases/loadedcommand"
+        },
+        {
+          "title": "Messagecommand",
+          "href": "/api/type-aliases/messagecommand"
+        },
+        {
+          "title": "Messagecommandafter",
+          "href": "/api/type-aliases/messagecommandafter"
+        },
+        {
+          "title": "Prefixresolver",
+          "href": "/api/type-aliases/prefixresolver"
+        },
+        {
+          "title": "Resolvedconfluxconfig",
+          "href": "/api/type-aliases/resolvedconfluxconfig"
+        },
+        {
+          "title": "Runconfluxoptions",
+          "href": "/api/type-aliases/runconfluxoptions"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "@confluxjs/tsconfig/library.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": ".",
+    "types": ["bun-types"]
+  },
+  "include": ["generate-api-reference.ts", "build-algolia-records.ts"]
+}

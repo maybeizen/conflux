@@ -1,0 +1,79 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+
+  "ui": "tui",
+
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build", "check-types"],
+
+      "outputs": ["dist/**", "build/**"],
+
+      "cache": true,
+    },
+
+    "check-types": {
+      "dependsOn": ["^build"],
+
+      "outputs": [],
+
+      "cache": true,
+    },
+
+    "dev": {
+      "dependsOn": ["^build"],
+
+      "cache": false,
+
+      "persistent": true,
+    },
+
+    "test": {
+      "dependsOn": ["build"],
+
+      "outputs": [],
+
+      "cache": true,
+    },
+
+    "//#docgen": {
+      "dependsOn": ["^build"],
+
+      "outputs": ["apps/website/api/**", "apps/website/.vitepress/data/api-sidebar-grouped.json"],
+
+      "cache": true,
+    },
+
+    "clean": {
+      "cache": false,
+    },
+
+    "lint": {
+      "dependsOn": ["^lint"],
+
+      "outputs": [],
+
+      "cache": true,
+    },
+
+    "format:check": {
+      "outputs": [],
+
+      "cache": true,
+    },
+
+    "//#format:check": {
+      "outputs": [],
+
+      "cache": true,
+    },
+
+    "website#build": {
+      "dependsOn": ["^build", "check-types", "//#docgen"],
+
+      "outputs": [".vitepress/dist/**"],
+
+      "cache": true,
+    },
+  },
+}

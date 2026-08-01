@@ -1,0 +1,45 @@
+{
+  "name": "@confluxjs/create-conflux",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./cli": {
+      "import": "./dist/cli.js",
+      "require": "./dist/cli.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "bin": {
+    "create-conflux": "./dist/cli.cjs"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "check-types": "tsc -p tsconfig.json --noEmit",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "dev": "tsdown --watch",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.10.0",
+    "picocolors": "^1.1.1",
+    "validate-npm-package-name": "^6.0.0"
+  },
+  "devDependencies": {
+    "@confluxjs/tsconfig": "workspace:*",
+    "@types/node": "^22.0.0",
+    "tsdown": "catalog:build",
+    "typescript": "catalog:build"
+  }
+}

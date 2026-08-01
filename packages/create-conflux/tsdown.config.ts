@@ -1,0 +1,11 @@
+import { defineConfig } from "tsdown";
+
+export default defineConfig({
+  entry: { index: "src/index.ts", cli: "src/cli.ts" },
+  format: ["esm", "cjs"],
+  platform: "node",
+  dts: { cjsReexport: true },
+  exports: true,
+  clean: true,
+  sourcemap: true,
+});

@@ -1,0 +1,10 @@
+{
+  "extends": "@confluxjs/tsconfig/library.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "ESNext",
+    "types": ["node"]
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vitepress build",
+    "check-types": "vue-tsc --noEmit -p tsconfig.json",
+    "dev": "vitepress dev",
+    "lint": "eslint .vitepress",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "typescript": "catalog:build",
+    "vitepress": "^1.6.3",
+    "vue": "^3.5.13",
+    "vue-tsc": "^3.0.5"
+  }
+}

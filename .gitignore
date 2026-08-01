@@ -1,0 +1,10 @@
+node_modules
+dist
+.turbo
+.conflux
+*.log
+apps/test-bot/.env
+apps/test-bot/dist
+**/.vitepress/dist
+**/.vitepress/cache
+apps/website/api

@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/tsconfig" },
+    { "path": "./packages/conflux" },
+    { "path": "./packages/create-conflux" },
+    { "path": "./apps/test-bot" },
+    { "path": "./apps/website" },
+    { "path": "./scripts/docgen" }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "name": "@confluxjs/conflux",
+  "version": "0.0.0",
+  "sideEffects": [
+    "./dist/cli.js",
+    "./dist/cli.cjs",
+    "./dist/start.js",
+    "./dist/start.cjs",
+    "./dist/dev-runner.js",
+    "./dist/dev-runner.cjs"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./cli": {
+      "import": "./dist/cli.js",
+      "require": "./dist/cli.cjs"
+    },
+    "./commands": {
+      "import": "./dist/commands.js",
+      "require": "./dist/commands.cjs"
+    },
+    "./config": {
+      "import": "./dist/config.js",
+      "require": "./dist/config.cjs"
+    },
+    "./dev-runner": {
+      "import": "./dist/dev-runner.js",
+      "require": "./dist/dev-runner.cjs"
+    },
+    "./events": {
+      "import": "./dist/events.js",
+      "require": "./dist/events.cjs"
+    },
+    "./runtime": {
+      "import": "./dist/runtime.js",
+      "require": "./dist/runtime.cjs"
+    },
+    "./start": {
+      "import": "./dist/start.js",
+      "require": "./dist/start.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "bin": {
+    "conflux": "./dist/cli.cjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "check-types": "tsc -p tsconfig.json --noEmit",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "dev": "tsdown --watch",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@confluxjs/tsconfig": "workspace:*",
+    "@fluxerjs/core": "catalog:",
+    "@types/node": "^22.0.0",
+    "tsdown": "catalog:build",
+    "typescript": "catalog:build"
+  },
+  "peerDependencies": {
+    "@fluxerjs/core": "catalog:"
+  }
+}

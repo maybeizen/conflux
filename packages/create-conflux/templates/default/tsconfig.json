@@ -1,0 +1,7 @@
+{
+  "extends": "@confluxjs/tsconfig/node.json",
+  "compilerOptions": {
+    "rootDir": "."
+  },
+  "include": ["src", "conflux.config.ts"]
+}
