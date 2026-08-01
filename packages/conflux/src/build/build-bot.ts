@@ -12,6 +12,16 @@ export type BuildBotOptions = {
   minify?: boolean;
 };
 
+export class BuildFailedError extends Error {
+  readonly exitCode: number;
+
+  constructor(exitCode: number) {
+    super(`Bun build failed with exit code ${exitCode}`);
+    this.name = "BuildFailedError";
+    this.exitCode = exitCode;
+  }
+}
+
 export async function buildBotProject(options: BuildBotOptions = {}): Promise<void> {
   const projectRoot = options.root ?? process.cwd();
   const config = await loadConfluxConfig(projectRoot);
@@ -49,6 +59,6 @@ export async function buildBotProject(options: BuildBotOptions = {}): Promise<vo
     throw result.error;
   }
   if (result.status !== 0) {
-    process.exit(result.status ?? 1);
+    throw new BuildFailedError(result.status ?? 1);
   }
 }
