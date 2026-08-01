@@ -31,7 +31,7 @@ src/commands/
 ## Global middleware
 
 ```ts
-import type { CommandMiddleware } from "@confluxjs/conflux/commands";
+import type { CommandMiddleware } from "@confluxjs/conflux";
 
 const middleware: CommandMiddleware = {
   async beforeExecute(ctx) {

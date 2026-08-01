@@ -33,8 +33,16 @@
           "href": "/api/functions/defineconfig"
         },
         {
+          "title": "Getconfig",
+          "href": "/api/functions/getconfig"
+        },
+        {
           "title": "Runconflux",
           "href": "/api/functions/runconflux"
+        },
+        {
+          "title": "Setconfig",
+          "href": "/api/functions/setconfig"
         },
         {
           "title": "Stopallevents",
@@ -46,6 +54,10 @@
       "id": "types",
       "title": "Type aliases",
       "items": [
+        {
+          "title": "Anyeventhandler",
+          "href": "/api/type-aliases/anyeventhandler"
+        },
         {
           "title": "Commandcontext",
           "href": "/api/type-aliases/commandcontext"

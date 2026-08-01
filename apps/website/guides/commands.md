@@ -12,7 +12,7 @@ Prefix commands live under `commandsDir` (default `src/commands`). Each module e
 At minimum, set `data.name`. Optional `aliases` register extra invocations.
 
 ```ts
-import type { MessageCommand } from "@confluxjs/conflux/commands";
+import type { MessageCommand } from "@confluxjs/conflux";
 
 export const data = {
   name: "say",

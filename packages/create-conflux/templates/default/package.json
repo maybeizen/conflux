@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "bun ./node_modules/@confluxjs/conflux/dist/cli.cjs build",
-    "dev": "bun ./node_modules/@confluxjs/conflux/dist/cli.cjs dev",
-    "start": "bun ./node_modules/@confluxjs/conflux/dist/cli.cjs start"
+    "build": "conflux build",
+    "dev": "conflux dev",
+    "start": "conflux start"
   },
   "dependencies": {
     "@confluxjs/conflux": "latest",

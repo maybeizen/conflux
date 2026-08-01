@@ -6,7 +6,7 @@ This repository is under active development. Published npm versions and the publ
 
 ## Requirements
 
-- [Bun](https://bun.sh) **1.3.9** (`packageManager` in `package.json`)
+- [Bun](https://bun.sh) **1.3.9** (or your package manager of choice, really)
 
 ## Repository layout
 
@@ -19,7 +19,7 @@ This repository is under active development. Published npm versions and the publ
 
 ## Development
 
-Install and build libraries/apps (Turbo):
+Install and build libraries/apps:
 
 ```bash
 bun install
@@ -59,6 +59,31 @@ bun add @confluxjs/conflux @fluxerjs/core
 ```
 
 See [Getting started](https://conflux.js.org/guides/getting-started) on the docs site.
+
+## Publishing
+
+Published npm packages (all at **0.1.0** initially):
+
+| Package                   | npm name                    |
+| ------------------------- | --------------------------- |
+| `packages/tsconfig`       | `@confluxjs/tsconfig`       |
+| `packages/conflux`        | `@confluxjs/conflux`        |
+| `packages/create-conflux` | `@confluxjs/create-conflux` |
+
+**Manual release** (from repo root):
+
+```bash
+bun install
+bun run build --filter=@confluxjs/tsconfig --filter=@confluxjs/conflux --filter=@confluxjs/create-conflux
+npm login
+cd packages/tsconfig && npm publish --access public && cd ../..
+cd packages/conflux && npm publish --access public && cd ../..
+cd packages/create-conflux && npm publish --access public && cd ../..
+```
+
+Bump `version` in each package `package.json` before publishing. Each package runs `prepublishOnly` to rebuild `dist` when publishing from its directory.
+
+**GitHub Actions:** run the [Publish workflow](.github/workflows/publish.yml) manually; set an npm automation token as the `NPM_TOKEN` repository secret.
 
 ## Contributing
 

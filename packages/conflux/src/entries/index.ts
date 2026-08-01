@@ -13,6 +13,12 @@ export type { ConfluxOptions, ConfluxUserConfig, ResolvedConfluxConfig } from ".
 export type { ConfluxConfigure, PrefixResolver } from "../core/conflux.js";
 export { Conflux, createConflux } from "../core/conflux.js";
 export { stopAllEvents } from "../events/pipeline.js";
-export type { EventHandler, EventHandlerContext, FluxerClientEventName } from "../events/types.js";
+export type {
+  AnyEventHandler,
+  EventHandler,
+  EventHandlerContext,
+  FluxerClientEventName,
+} from "../events/types.js";
 export type { RunConfluxOptions } from "../runtime/run-conflux.js";
 export { runConflux } from "../runtime/run-conflux.js";
+export { getConfig, setConfig } from "../runtime/state.js";

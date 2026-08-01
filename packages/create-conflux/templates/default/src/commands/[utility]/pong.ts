@@ -1,4 +1,4 @@
-import type { MessageCommand } from "@confluxjs/conflux/commands";
+import type { MessageCommand } from "@confluxjs/conflux";
 
 export const data = {
   name: "pong",
