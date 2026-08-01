@@ -30,8 +30,6 @@ jobs:
         run: bun run docgen
 
       - name: Build website
-        env:
-          VITEPRESS_BASE: /confluxjs/
         run: bun run --filter website build
 
       - name: Upload artifact
