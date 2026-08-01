@@ -1,6 +1,6 @@
 {
   "name": "@confluxjs/create-conflux",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Scaffold a new Conflux bot project",
   "keywords": [
     "conflux",
@@ -37,7 +37,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "create-conflux": "./dist/cli.cjs"
+    "create-conflux": "./dist/cli.js"
   },
   "files": [
     "dist",
