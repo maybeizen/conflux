@@ -16,12 +16,18 @@ async function runHandlerBatch(
   handlers: AnyEventHandler[],
   fluxerArgs: unknown[],
   ctx: EventHandlerContext,
+  conflux: Conflux,
+  eventName: string,
 ): Promise<void> {
   for (const handler of handlers) {
     if (isEventPipelineHalted()) {
       break;
     }
-    await handler(...fluxerArgs, ctx);
+    try {
+      await handler(...fluxerArgs, ctx);
+    } catch (error) {
+      await conflux.reportError(error, { scope: "event", eventName });
+    }
   }
 }
 
@@ -36,7 +42,11 @@ export function registerConfluxEventHandlers(
         return;
       }
       const ctx = createHandlerContext(client, conflux);
-      void runHandlerBatch(handlers, fluxerArgs, ctx);
+      void runHandlerBatch(handlers, fluxerArgs, ctx, conflux, eventName).catch(
+        (error: unknown) => {
+          void conflux.reportError(error, { scope: "event", eventName });
+        },
+      );
     });
   }
 }

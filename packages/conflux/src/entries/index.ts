@@ -19,6 +19,12 @@ export type {
   EventHandlerContext,
   FluxerClientEventName,
 } from "../events/types.js";
+export type {
+  ConfluxErrorContext,
+  ConfluxErrorHandler,
+  ConfluxErrorScope,
+} from "../runtime/handle-error.js";
+export { defaultConfluxErrorHandler } from "../runtime/handle-error.js";
 export type { RunConfluxOptions } from "../runtime/run-conflux.js";
 export { runConflux } from "../runtime/run-conflux.js";
 export { getConfig, setConfig } from "../runtime/state.js";
