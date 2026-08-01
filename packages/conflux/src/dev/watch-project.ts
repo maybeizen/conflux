@@ -97,7 +97,9 @@ export async function runProjectDevWatch(root?: string): Promise<void> {
       startChild(runnerPath);
     } catch (error: unknown) {
       if (error instanceof BuildFailedError) {
-        console.error(`\n[conflux dev] Build failed (exit ${error.exitCode}). Fix the error above and save to retry.`);
+        console.error(
+          `\n[conflux dev] Build failed (exit ${error.exitCode}). Fix the error above and save to retry.`,
+        );
       } else {
         const message = error instanceof Error ? error.message : String(error);
         console.error(`\n[conflux dev] ${message}`);

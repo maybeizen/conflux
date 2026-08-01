@@ -42,9 +42,11 @@ export function registerConfluxEventHandlers(
         return;
       }
       const ctx = createHandlerContext(client, conflux);
-      void runHandlerBatch(handlers, fluxerArgs, ctx, conflux, eventName).catch((error: unknown) => {
-        void conflux.reportError(error, { scope: "event", eventName });
-      });
+      void runHandlerBatch(handlers, fluxerArgs, ctx, conflux, eventName).catch(
+        (error: unknown) => {
+          void conflux.reportError(error, { scope: "event", eventName });
+        },
+      );
     });
   }
 }

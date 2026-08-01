@@ -2,10 +2,7 @@ import type { Client } from "@fluxerjs/core";
 
 import type { ConfluxOptions } from "../config/types.js";
 import type { ConfluxErrorContext, ConfluxErrorHandler } from "../runtime/handle-error.js";
-import {
-  defaultConfluxErrorHandler,
-  invokeConfluxErrorHandler,
-} from "../runtime/handle-error.js";
+import { defaultConfluxErrorHandler, invokeConfluxErrorHandler } from "../runtime/handle-error.js";
 
 export type PrefixResolver = () => string | string[] | Promise<string | string[]>;
 

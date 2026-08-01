@@ -1,9 +1,5 @@
 export type ConfluxErrorScope =
-  | "command"
-  | "command-after"
-  | "middleware-before"
-  | "middleware-after"
-  | "event";
+  "command" | "command-after" | "middleware-before" | "middleware-after" | "event";
 
 export type ConfluxErrorContext = {
   scope: ConfluxErrorScope;
