@@ -7,17 +7,14 @@
     "typescript",
     "tsconfig"
   ],
-  "license": "MIT",
+  "homepage": "https://conflux.js.org",
+  "bugs": "https://github.com/confluxjs/conflux.js/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/confluxjs/conflux.js.git",
     "directory": "packages/tsconfig"
   },
-  "homepage": "https://conflux.js.org",
-  "bugs": "https://github.com/confluxjs/conflux.js/issues",
-  "publishConfig": {
-    "access": "public"
-  },
+  "license": "MIT",
   "exports": {
     "./base.json": "./base.json",
     "./library.json": "./library.json",
@@ -32,5 +29,8 @@
   "scripts": {
     "check-types": "node -e \"process.exit(0)\"",
     "lint": "node -e \"process.exit(0)\""
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

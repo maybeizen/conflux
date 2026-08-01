@@ -10,20 +10,14 @@
     "scaffold",
     "cli"
   ],
-  "license": "MIT",
+  "homepage": "https://conflux.js.org",
+  "bugs": "https://github.com/confluxjs/conflux.js/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/confluxjs/conflux.js.git",
     "directory": "packages/create-conflux"
   },
-  "homepage": "https://conflux.js.org",
-  "bugs": "https://github.com/confluxjs/conflux.js/issues",
-  "publishConfig": {
-    "access": "public"
-  },
-  "engines": {
-    "node": ">=20"
-  },
+  "license": "MIT",
   "sideEffects": false,
   "type": "module",
   "exports": {
@@ -68,5 +62,11 @@
     "@types/node": "^22.0.0",
     "tsdown": "catalog:build",
     "typescript": "catalog:build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
