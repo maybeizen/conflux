@@ -83,8 +83,6 @@ cd packages/create-conflux && npm publish --access public && cd ../..
 
 Bump `version` in each package `package.json` before publishing. Each package runs `prepublishOnly` to rebuild `dist` when publishing from its directory.
 
-**GitHub Actions:** run the [Publish workflow](.github/workflows/publish.yml) manually; set an npm automation token as the `NPM_TOKEN` repository secret.
-
 ## Contributing
 
 Open pull requests against **`dev`** first; promote to **`main`** for release. Branching and GitHub settings are described in [.github/BRANCHING.md](.github/BRANCHING.md).

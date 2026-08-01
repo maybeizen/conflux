@@ -8,10 +8,10 @@
     "tsconfig"
   ],
   "homepage": "https://conflux.js.org",
-  "bugs": "https://github.com/confluxjs/conflux.js/issues",
+  "bugs": "https://github.com/maybeizen/confluxjs/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/confluxjs/conflux.js.git",
+    "url": "git+https://github.com/maybeizen/confluxjs.git",
     "directory": "packages/tsconfig"
   },
   "license": "MIT",

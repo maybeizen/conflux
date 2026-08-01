@@ -27,4 +27,4 @@ Thanks to **[UnderCtrl](https://www.youtube.com/@UnderCtrl)** for popularizing C
 
 Thank you to everyone who opens issues, sends pull requests, tries Conflux in real bots, and improves the docs.
 
-See the [GitHub contributors graph](https://github.com/confluxjs/conflux.js/graphs/contributors) for the full list.
+See the [GitHub contributors graph](https://github.com/maybeizen/confluxjs/graphs/contributors) for the full list.
