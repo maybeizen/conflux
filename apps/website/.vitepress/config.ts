@@ -76,7 +76,7 @@ const search =
       }
     : { provider: "local" as const };
 
-const GITHUB_URL = "https://github.com/confluxjs/conflux.js";
+const GITHUB_URL = "https://github.com/maybeizen/confluxjs";
 const FLUXER_SERVER_URL = "https://fluxer.app/invite/REPLACE_ME";
 
 export default defineConfig({
