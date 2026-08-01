@@ -41,7 +41,13 @@ Load variables from `.env` automatically in dev and start.
 
 ## Command prefix
 
-Set `prefix` to a single string or an array of strings. Messages are matched against each prefix in order (first match wins).
+The `prefix` option controls which message prefixes trigger [prefix commands](/guides/commands#command-prefix).
+
+| Value              | Resolved behavior                          |
+| ------------------ | ------------------------------------------ |
+| Omitted            | `["!"]`                                    |
+| `string`           | Single prefix, for example `["!"]`         |
+| `string[]`         | Multiple prefixes, tried in array order    |
 
 ```ts
 export default defineConfig({
@@ -53,7 +59,9 @@ export default defineConfig({
 });
 ```
 
-Default is `"!"` when omitted. For dynamic prefixes, export `configure(conflux)` from your entry module and call `conflux.setPrefix()`.
+At runtime, Conflux loads config prefixes first, then runs optional `configure(conflux)` from your entry module. If `configure` calls `conflux.setPrefix()`, that resolver replaces the config value for the rest of the process lifetime.
+
+Use config for fixed prefixes. Use `setPrefix` when prefixes must be computed (dynamic lists, per-request logic, or async resolution). See [`PrefixResolver`](/api/type-aliases/prefixresolver) in the API reference.
 
 ## Dev vs production output
 
