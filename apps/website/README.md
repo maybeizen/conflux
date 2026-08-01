@@ -19,5 +19,3 @@ bun run docgen
 | `bun run preview`     | Preview production build              |
 | `bun run check-types` | `vue-tsc` on theme/config             |
 | `bun run lint`        | ESLint on `.vitepress`                |
-
-Custom domain `CNAME` is in `public/CNAME` and copied into the build output.
