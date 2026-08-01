@@ -11,6 +11,13 @@ export const CONFIG_FILENAMES = [
   "conflux.config.cts",
 ] as const;
 
+export function resolvePrefixList(prefix?: string | string[]): string[] {
+  if (prefix === undefined) {
+    return ["!"];
+  }
+  return Array.isArray(prefix) ? prefix : [prefix];
+}
+
 export function resolveConfluxConfig(
   config: ConfluxUserConfig,
   root: string,
@@ -24,5 +31,6 @@ export function resolveConfluxConfig(
     eventsDir: resolve(resolvedRoot, config.eventsDir ?? "src/events"),
     token: config.token,
     env: config.env,
+    prefix: resolvePrefixList(config.prefix),
   };
 }

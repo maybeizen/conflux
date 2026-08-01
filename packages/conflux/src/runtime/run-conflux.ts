@@ -40,6 +40,7 @@ export async function runConflux(options: RunConfluxOptions = {}): Promise<Confl
   const { client, configure } = await loadEntryModule(config.entry);
   const conflux = new Conflux({ root: config.root });
   conflux.client = client;
+  conflux.setPrefix(() => config.prefix);
   await configure?.(conflux);
   const commandRegistry = await loadCommandRegistry(config.commandsDir);
   const eventHandlers = await loadEventHandlerRegistry(config.eventsDir);

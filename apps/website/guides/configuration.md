@@ -16,6 +16,7 @@ export default defineConfig({
   eventsDir: "src/events",
   commandsDir: "src/commands",
   env: "FLUXER_BOT_TOKEN",
+  prefix: "!",
 });
 ```
 
@@ -37,6 +38,22 @@ Load variables from `.env` automatically in dev and start.
 | `commandsDir` | `src/commands` | Prefix command modules        |
 | `eventsDir`   | `src/events`   | Event handler folders         |
 | `outDir`      | `dist`         | Production bundle output      |
+
+## Command prefix
+
+Set `prefix` to a single string or an array of strings. Messages are matched against each prefix in order (first match wins).
+
+```ts
+export default defineConfig({
+  prefix: "!",
+});
+
+export default defineConfig({
+  prefix: ["!", "?"],
+});
+```
+
+Default is `"!"` when omitted. For dynamic prefixes, export `configure(conflux)` from your entry module and call `conflux.setPrefix()`.
 
 ## Dev vs production output
 

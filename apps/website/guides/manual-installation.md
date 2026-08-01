@@ -60,16 +60,13 @@ Never commit `.env` or bot tokens to version control. Use your host’s secret m
 
 ```ts
 import { Client } from "@fluxerjs/core";
-import type { Conflux } from "@confluxjs/conflux";
 
 const client = new Client({ intents: 0 });
 
-export async function configure(conflux: Conflux) {
-  conflux.setPrefix(async () => ["!"]);
-}
-
 export { client };
 ```
+
+Configure prefixes in `conflux.config.ts` with `prefix: "!"` or `prefix: ["!", "?"]`.
 
 ## Scripts
 

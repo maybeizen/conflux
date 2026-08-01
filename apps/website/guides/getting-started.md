@@ -61,17 +61,14 @@ Create a `@fluxerjs/core` `Client` in your entry file (default `src/index.ts`) a
 
 ```ts
 import { Client } from "@fluxerjs/core";
-import type { Conflux } from "@confluxjs/conflux";
 
 const client = new Client({ intents: 0 });
-
-export async function configure(conflux: Conflux) {
-  conflux.setPrefix(async () => ["!"]);
-}
 
 export { client };
 ```
 
+Set command prefixes in `conflux.config.ts` (see [Configuration](/guides/configuration#command-prefix)).
+
 ::: info
-Optional `configure(conflux)` runs before commands load. Conflux registers handlers and prefix commands before calling `login`.
+Optional `configure(conflux)` runs before commands load and can override config (for example `setPrefix` for dynamic prefixes). Conflux registers handlers and prefix commands before calling `login`.
 :::
