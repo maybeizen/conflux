@@ -31,12 +31,18 @@ jobs:
 
       - name: Publish @confluxjs/tsconfig
         working-directory: packages/tsconfig
-        run: npm publish --access public --provenance
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @confluxjs/conflux
         working-directory: packages/conflux
-        run: npm publish --access public --provenance
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @confluxjs/create-conflux
         working-directory: packages/create-conflux
-        run: npm publish --access public --provenance
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
