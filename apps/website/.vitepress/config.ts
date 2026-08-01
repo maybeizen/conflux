@@ -79,7 +79,7 @@ const search =
 const GITHUB_URL = "https://github.com/maybeizen/confluxjs";
 const FLUXER_SERVER_URL = "https://fluxer.app/invite/REPLACE_ME";
 
-const githubRepoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "confluxjs";
+const githubRepoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "conflux";
 const vitepressBase = process.env.VITEPRESS_BASE?.trim();
 const base = vitepressBase
   ? vitepressBase.endsWith("/")
