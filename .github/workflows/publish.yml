@@ -31,8 +31,22 @@ jobs:
 
       - name: Publish @confluxjs/conflux
         working-directory: packages/conflux
-        run: npm publish --access public --provenance --skip-published
+        run: |
+          PKG_NAME=$(node -p "require('./package.json').name")
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          if npm view "$PKG_NAME@$PKG_VERSION" version > /dev/null 2>&1; then
+            echo "✅ $PKG_NAME@$PKG_VERSION already published, skipping."
+          else
+            npm publish --access public --provenance
+          fi
 
       - name: Publish @confluxjs/create-conflux
         working-directory: packages/create-conflux
-        run: npm publish --access public --provenance --skip-published
+        run: |
+          PKG_NAME=$(node -p "require('./package.json').name")
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          if npm view "$PKG_NAME@$PKG_VERSION" version > /dev/null 2>&1; then
+            echo "✅ $PKG_NAME@$PKG_VERSION already published, skipping."
+          else
+            npm publish --access public --provenance
+          fi
