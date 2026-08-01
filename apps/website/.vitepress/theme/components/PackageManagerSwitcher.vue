@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { withBase } from "vitepress/client";
 import { computed } from "vue";
 
 import { type PackageManager, usePackageManagerSelection } from "../usePackageManager";
@@ -25,25 +26,25 @@ const managers = computed(() => [
     id: "npm" as const,
     label: "npm",
     command: formatCommand(props.npm),
-    icon: "/icons/npm.svg",
+    icon: withBase("/icons/npm.svg"),
   },
   {
     id: "pnpm" as const,
     label: "pnpm",
     command: formatCommand(props.pnpm),
-    icon: "/icons/pnpm.svg",
+    icon: withBase("/icons/pnpm.svg"),
   },
   {
     id: "yarn" as const,
     label: "yarn",
     command: formatCommand(props.yarn),
-    icon: "/icons/yarn.svg",
+    icon: withBase("/icons/yarn.svg"),
   },
   {
     id: "bun" as const,
     label: "bun",
     command: formatCommand(props.bun),
-    icon: "/icons/bun.svg",
+    icon: withBase("/icons/bun.svg"),
   },
 ]);
 

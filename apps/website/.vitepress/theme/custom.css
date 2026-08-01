@@ -345,3 +345,20 @@
     background: rgba(204, 255, 0, 0.55);
   }
 }
+
+:root,
+.dark {
+  --vp-c-brand-1: #ccff00;
+  --vp-c-brand-2: #b8e600;
+  --vp-c-brand-3: #9dcc00;
+  --vp-c-brand-soft: rgba(204, 255, 0, 0.14);
+  --vp-c-sponsor: #ccff00;
+  --vp-button-brand-bg: #ccff00;
+  --vp-button-brand-hover-bg: #e5ff4d;
+  --vp-button-brand-text: #0a0a0a;
+  --vp-button-brand-border: #ccff00;
+  --vp-button-brand-hover-border: #e5ff4d;
+  --vp-button-brand-active-border: #b8e600;
+  --vp-home-hero-name-color: #ccff00;
+  --vp-home-hero-name-background: transparent;
+}
