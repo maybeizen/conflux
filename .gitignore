@@ -6,3 +6,4 @@ dist
 **/.vitepress/dist
 **/.vitepress/cache
 apps/website/api
+*.tsbuildinfo
