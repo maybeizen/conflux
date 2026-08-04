@@ -14,7 +14,7 @@ const props = withDefaults(
     bun: string;
     defaultManager?: Manager;
   }>(),
-  { defaultManager: "bun" },
+  { defaultManager: "pnpm" },
 );
 
 function formatCommand(command: string): string {

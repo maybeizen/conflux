@@ -26,7 +26,7 @@ export default tseslint.config(
       "packages/create-conflux/dist/**",
       "packages/conflux/tsdown.config.ts",
       "packages/create-conflux/tsdown.config.ts",
-      "bun.lock",
+      "pnpm-lock.yaml",
       "**/*.md",
       "**/*.yml",
       "**/*.yaml",

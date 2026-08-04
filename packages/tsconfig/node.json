@@ -3,7 +3,7 @@
   "extends": "./base.json",
   "compilerOptions": {
     "module": "ESNext",
-    "types": ["bun"],
+    "types": ["node"],
     "allowJs": true,
     "noEmit": true
   }

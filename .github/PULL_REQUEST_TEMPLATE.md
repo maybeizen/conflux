@@ -4,7 +4,7 @@
 
 ## Test plan
 
-- [ ] `bun run format:check`
-- [ ] `bun run lint`
-- [ ] `bun run check-types`
-- [ ] `bun run build` (and docgen / website build if docs or API changed)
+- [ ] `pnpm run format:check`
+- [ ] `pnpm run lint`
+- [ ] `pnpm run check-types`
+- [ ] `pnpm run build` (and docgen / website build if docs or API changed)

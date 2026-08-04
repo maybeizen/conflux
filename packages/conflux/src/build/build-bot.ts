@@ -16,7 +16,7 @@ export class BuildFailedError extends Error {
   readonly exitCode: number;
 
   constructor(exitCode: number) {
-    super(`Bun build failed with exit code ${exitCode}`);
+    super(`pnpm build failed with exit code ${exitCode}`);
     this.name = "BuildFailedError";
     this.exitCode = exitCode;
   }
@@ -51,7 +51,7 @@ export async function buildBotProject(options: BuildBotOptions = {}): Promise<vo
   if (options.minify !== false) {
     args.push("--minify");
   }
-  const result = spawnSync("bun", args, {
+  const result = spawnSync("pnpm", args, {
     cwd: config.root,
     stdio: "inherit",
   });
