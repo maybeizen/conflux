@@ -1,6 +1,6 @@
 {
   "name": "@confluxjs/conflux",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Conflux bot framework CLI and runtime for Fluxer",
   "keywords": [
     "conflux",
@@ -86,7 +86,7 @@
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "dev": "tsdown --watch",
     "lint": "eslint src",
-    "prepublishOnly": "bun run build"
+    "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
     "@confluxjs/tsconfig": "workspace:*",

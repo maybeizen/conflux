@@ -52,7 +52,7 @@ VitePress site with guides, contributing docs, and generated API markdown under 
 ## API reference generation
 
 ```bash
-bun run docgen
+pnpm run docgen
 ```
 
 Runs `scripts/docgen/generate-api-reference.ts` on `packages/conflux/src/entries/index.ts` and outputs to `apps/website/api/`.

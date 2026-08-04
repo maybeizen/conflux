@@ -40,7 +40,7 @@ function watchFile(path: string, onChange: () => void, watchers: ReturnType<type
 export async function runProjectDevWatch(root?: string): Promise<void> {
   const projectRoot = root ?? process.cwd();
   const devOutDir = resolveDevOutDir(projectRoot);
-  const bunExecutable = process.env.CONFLUX_BUN ?? "bun";
+  const bunExecutable = process.env.CONFLUX_BUN ?? "pnpm";
   const watchers: ReturnType<typeof watch>[] = [];
   let child: ChildProcess | null = null;
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;

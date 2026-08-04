@@ -119,9 +119,9 @@ rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 
 const run = spawnSync(
-  "bun",
+  "pnpm",
   [
-    "x",
+    "exec",
     "typedoc",
     "--entryPoints",
     entry,

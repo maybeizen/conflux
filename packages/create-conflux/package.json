@@ -1,6 +1,6 @@
 {
   "name": "@confluxjs/create-conflux",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Scaffold a new Conflux bot project",
   "keywords": [
     "conflux",
@@ -50,7 +50,7 @@
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "dev": "tsdown --watch",
     "lint": "eslint src",
-    "prepublishOnly": "bun run build"
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@clack/prompts": "^0.10.0",

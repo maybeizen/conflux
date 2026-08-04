@@ -29,17 +29,17 @@ function detectFromUserAgent(): PackageManager | undefined {
 }
 
 function detectFromLockfiles(cwd: string): PackageManager | undefined {
+  if (fileExists(join(cwd, "pnpm-lock.yaml"))) return "pnpm";
   if (fileExists(join(cwd, "bun.lock")) || fileExists(join(cwd, "bun.lockb"))) {
     return "bun";
   }
-  if (fileExists(join(cwd, "pnpm-lock.yaml"))) return "pnpm";
   if (fileExists(join(cwd, "yarn.lock"))) return "yarn";
   if (fileExists(join(cwd, "package-lock.json"))) return "npm";
   return undefined;
 }
 
 function detectFromPath(): PackageManager | undefined {
-  const order: PackageManager[] = ["bun", "pnpm", "yarn", "npm"];
+  const order: PackageManager[] = ["pnpm", "bun", "yarn", "npm"];
   for (const pm of order) {
     if (commandOnPath(pm)) return pm;
   }

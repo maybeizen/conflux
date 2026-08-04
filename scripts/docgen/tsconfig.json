@@ -3,7 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "rootDir": ".",
-    "types": ["bun-types"],
+    "types": ["node"],
     "lib": ["ES2022"]
   },
   "include": ["generate-api-reference.ts", "build-algolia-records.ts"]
