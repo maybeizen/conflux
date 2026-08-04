@@ -24,8 +24,8 @@ Environment:
   Package manager is detected from npm user-agent, lockfiles in cwd, then PATH.
 
 Examples:
-  ${pc.cyan("bunx create-conflux")}
-  ${pc.cyan("bunx create-conflux my-bot")}
+  ${pc.cyan("pnpm create @confluxjs/create-conflux")}
+  ${pc.cyan("pnpm create @confluxjs/create-conflux my-bot")}
   ${pc.cyan("npm create @confluxjs/create-conflux@latest")}
 `);
     process.exit(0);

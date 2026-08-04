@@ -1,0 +1,14 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+allowBuilds:
+  esbuild: false
+
+catalog:
+  "@fluxerjs/core": "^2.1.0"
+
+catalogs:
+  build:
+    typescript: "^5.9.2"
+    tsdown: "^0.15.4"

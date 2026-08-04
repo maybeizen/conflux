@@ -5,5 +5,5 @@ dist
 **/.vitepress/dist
 **/.vitepress/cache
 apps/website/api
-bun.lock
+pnpm-lock.yaml
 coverage

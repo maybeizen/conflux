@@ -7,7 +7,7 @@ Scaffold a new Conflux bot project with an interactive CLI.
 ```bash
 pnpm create @confluxjs/create-conflux
 # npm: npm create @confluxjs/create-conflux@latest
-# bun: bunx @confluxjs/create-conflux@latest
+# pnpm: pnpm create @confluxjs/create-conflux@latest
 ```
 
 ### Interactive flow
@@ -20,17 +20,13 @@ The CLI walks you through:
 4. **Git** - optional `git init` (default: yes)
 5. **Install** - optional dependency install (default: yes)
 
-## Publishing (maintainers)
-
-Build and publish from the monorepo root (see [root README](../../README.md#publishing) or `packages/conflux/README.md`). This package is published as `@confluxjs/create-conflux`.
-
 ## Scripts
 
-| Script                | Description |
-| --------------------- | ----------- |
-| `bun run build`       | Build CLI   |
-| `bun run check-types` | Typecheck   |
-| `bun run lint`        | ESLint      |
+| Script                 | Description |
+| ---------------------- | ----------- |
+| `pnpm run build`       | Build CLI   |
+| `pnpm run check-types` | Typecheck   |
+| `pnpm run lint`        | ESLint      |
 
 ## Links
 
