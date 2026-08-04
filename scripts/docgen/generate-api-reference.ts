@@ -121,7 +121,7 @@ mkdirSync(outDir, { recursive: true });
 const run = spawnSync(
   "pnpm",
   [
-    "x",
+    "exec",
     "typedoc",
     "--entryPoints",
     entry,
