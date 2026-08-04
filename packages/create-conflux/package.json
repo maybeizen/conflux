@@ -55,7 +55,7 @@
   "dependencies": {
     "@clack/prompts": "^0.10.0",
     "picocolors": "^1.1.1",
-    "validate-npm-package-name": "^6.0.0"
+    "validate-npm-package-name": "^8.0.0"
   },
   "devDependencies": {
     "@confluxjs/tsconfig": "workspace:*",
