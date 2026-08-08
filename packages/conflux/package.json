@@ -91,7 +91,7 @@
   "devDependencies": {
     "@confluxjs/tsconfig": "workspace:*",
     "@fluxerjs/core": "catalog:",
-    "@types/node": "^22.0.0",
+    "@types/node": "^26.1.2",
     "tsdown": "catalog:build",
     "typescript": "catalog:build"
   },
