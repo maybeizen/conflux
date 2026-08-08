@@ -27,7 +27,7 @@
     "typedoc": "^0.28.0",
     "typedoc-plugin-markdown": "^4.6.0",
     "typescript": "catalog:build",
-    "typescript-eslint": "^8.46.4",
+    "typescript-eslint": "^8.66.0",
     "vue-eslint-parser": "^10.2.0"
   },
   "packageManager": "pnpm@11.20.0"
