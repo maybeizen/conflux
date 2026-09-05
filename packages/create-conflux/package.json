@@ -53,13 +53,13 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@clack/prompts": "^0.10.0",
+    "@clack/prompts": "^0.10.1",
     "picocolors": "^1.1.1",
-    "validate-npm-package-name": "^6.0.0"
+    "validate-npm-package-name": "^6.0.2"
   },
   "devDependencies": {
     "@confluxjs/tsconfig": "workspace:*",
-    "@types/node": "^22.0.0",
+    "@types/node": "^22.20.1",
     "tsdown": "catalog:build",
     "typescript": "catalog:build"
   },

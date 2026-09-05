@@ -6,9 +6,9 @@ allowBuilds:
   esbuild: false
 
 catalog:
-  "@fluxerjs/core": "^2.1.0"
+  "@fluxerjs/core": "^2.2.0"
 
 catalogs:
   build:
-    typescript: "^5.9.2"
-    tsdown: "^0.15.4"
+    typescript: "^5.9.3"
+    tsdown: "^0.15.12"
