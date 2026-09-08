@@ -44,6 +44,49 @@ Calling `stopAllEvents()` is useful when a handler fully owns an event stream (f
 
 Prefix commands register a separate `messageCreate` listener from handlers under `events/messageCreate/`. Both can coexist; design handlers to avoid conflicting replies when possible.
 
+`messageCreate` always receives a full `Message`. `message.channel` may be `null` when the channel is uncached; call `message.resolveChannel()` before `send` or `delete`.
+
+## Partial payloads (Fluxer 3)
+
+`EventHandler<K>` uses Fluxer's `ClientEvents`, so uncached delete/update/remove payloads are partial. Check `.partial` (or fetch) before reading `content`, `author`, `nick`, or calling `reply`.
+
+| Event               | Payload                                                                                                            |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `messageDelete`     | `PartialMessage` — has `id`, `channelId`, `guildId`, `fetch()`, `resolveChannel()`. No `edit` / `reply` / `react`. |
+| `messageUpdate`     | Cached edits are `Message`. Uncached edits are `PartialMessage`.                                                   |
+| `guildMemberRemove` | `GuildMember \| PartialGuildMember`. Partial members have `id`, `guildId`, `user`, and `guild`.                    |
+| `messageDeleteBulk` | Includes `messages: PartialMessage[]` plus the channel and ids.                                                    |
+
+```ts
+import type { EventHandler } from "@confluxjs/conflux";
+
+const handler: EventHandler<"messageDelete"> = (message, ctx) => {
+  if (message.partial) {
+    console.log("uncached delete", message.id, message.authorId);
+    return;
+  }
+  console.log("cached delete", message.content);
+};
+
+export default handler;
+```
+
+## Role events
+
+`guildRoleCreate` is still a single `Role`. Fluxer 3 emits update as `(oldRole, role)` and delete as `(role, guildId, roleId)`. `oldRole` on update and `role` on delete are `null` when the role was uncached:
+
+```ts
+import type { EventHandler } from "@confluxjs/conflux";
+
+const onUpdate: EventHandler<"guildRoleUpdate"> = (oldRole, role, ctx) => {
+  console.log(oldRole?.name, "→", role.name);
+};
+
+const onDelete: EventHandler<"guildRoleDelete"> = (role, guildId, roleId, ctx) => {
+  console.log(role?.name ?? roleId, "removed from", guildId);
+};
+```
+
 ## API
 
 The [`stopAllEvents`](/api/functions/stopallevents) function is also exported from the package for advanced use.

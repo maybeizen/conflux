@@ -72,3 +72,20 @@ Use config for fixed prefixes. Use `setPrefix` when prefixes must be computed (d
 | `conflux start` | Uses `outDir` when present | Falls back to source entry         |
 
 Do not commit `.conflux/`; treat `dist/` as deploy artifacts after `conflux build`.
+
+## tsdown build options
+
+Bot bundling is powered by [tsdown](https://tsdown.dev). Pass extra tsdown options through `tsdown` in `conflux.config.ts`. They merge over Conflux defaults. Conflux still owns `entry`, `outDir`, `cwd`, and config-file loading so command and event discovery keep working.
+
+```ts
+import { defineConfig } from "@confluxjs/conflux";
+
+export default defineConfig({
+  prefix: "!",
+  tsdown: {
+    target: "node20",
+    alias: { "@": "./src" },
+    define: { "import.meta.env.DEV": "true" },
+  },
+});
+```

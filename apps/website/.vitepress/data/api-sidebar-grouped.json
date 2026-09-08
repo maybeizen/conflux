@@ -103,6 +103,10 @@
           "href": "/api/type-aliases/confluxoptions"
         },
         {
+          "title": "Confluxtsdownoptions",
+          "href": "/api/type-aliases/confluxtsdownoptions"
+        },
+        {
           "title": "Confluxuserconfig",
           "href": "/api/type-aliases/confluxuserconfig"
         },

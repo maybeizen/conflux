@@ -1,6 +1,6 @@
 {
   "name": "@confluxjs/conflux",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Conflux bot framework CLI and runtime for Fluxer",
   "keywords": [
     "conflux",
@@ -88,15 +88,17 @@
     "lint": "eslint src",
     "prepublishOnly": "pnpm run build"
   },
+  "dependencies": {
+    "tsdown": "catalog:build"
+  },
   "devDependencies": {
     "@confluxjs/tsconfig": "workspace:*",
     "@fluxerjs/core": "catalog:",
     "@types/node": "^22.20.1",
-    "tsdown": "catalog:build",
     "typescript": "catalog:build"
   },
   "peerDependencies": {
-    "@fluxerjs/core": "^2.1.0"
+    "@fluxerjs/core": "^3.0.0"
   },
   "engines": {
     "node": ">=20"
