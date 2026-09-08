@@ -98,7 +98,7 @@
     "typescript": "catalog:build"
   },
   "peerDependencies": {
-    "@fluxerjs/core": "^2.1.0"
+    "@fluxerjs/core": "^3.0.0"
   },
   "engines": {
     "node": ">=20"

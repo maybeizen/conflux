@@ -6,7 +6,7 @@ allowBuilds:
   esbuild: false
 
 catalog:
-  "@fluxerjs/core": "^2.2.0"
+  "@fluxerjs/core": "^3.0.0"
 
 catalogs:
   build:

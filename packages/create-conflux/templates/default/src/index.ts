@@ -1,5 +1,5 @@
 import { Client } from "@fluxerjs/core";
 
-const client = new Client({ intents: 0 });
+const client = new Client();
 
 export { client };
