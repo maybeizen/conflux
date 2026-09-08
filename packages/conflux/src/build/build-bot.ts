@@ -1,4 +1,5 @@
 import { dirname, relative } from "node:path";
+
 import { build } from "tsdown";
 
 import { loadCommandRegistry } from "../commands/load-registry.js";
