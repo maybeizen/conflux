@@ -1,10 +1,12 @@
-import { spawnSync } from "node:child_process";
-import { relative } from "node:path";
+import { dirname, relative } from "node:path";
+import { build } from "tsdown";
 
 import { loadCommandRegistry } from "../commands/load-registry.js";
 import { loadConfluxConfig } from "../config/load-config.js";
 import { collectCommandTreeModulePaths } from "../loader/command-paths.js";
 import { collectEventDirectoryModulePaths } from "../loader/directory-modules.js";
+
+const SOURCE_EXT = /\.(tsx?|mts|cts)$/i;
 
 export type BuildBotOptions = {
   root?: string;
@@ -15,11 +17,20 @@ export type BuildBotOptions = {
 export class BuildFailedError extends Error {
   readonly exitCode: number;
 
-  constructor(exitCode: number) {
-    super(`pnpm build failed with exit code ${exitCode}`);
+  constructor(exitCode: number, cause?: unknown) {
+    super(`tsdown build failed with exit code ${exitCode}`);
     this.name = "BuildFailedError";
     this.exitCode = exitCode;
+    if (cause !== undefined) {
+      this.cause = cause;
+    }
   }
+}
+
+function toEntryName(entryFile: string, sourcePath: string): string {
+  return relative(dirname(entryFile), sourcePath)
+    .replaceAll("\\", "/")
+    .replace(SOURCE_EXT, "");
 }
 
 export async function buildBotProject(options: BuildBotOptions = {}): Promise<void> {
@@ -34,31 +45,28 @@ export async function buildBotProject(options: BuildBotOptions = {}): Promise<vo
     ...collectEventDirectoryModulePaths(config.eventsDir),
     ...collectCommandTreeModulePaths(config.commandsDir),
   ];
-  const outDir = options.outDir ?? config.outDir;
-  const relEntrypoints = entrypoints.map((path) => relative(config.root, path));
-  const relOutDir = relative(config.root, outDir);
-  const args = [
-    "build",
-    ...relEntrypoints,
-    "--outdir",
-    relOutDir,
-    "--target",
-    "node",
-    "--packages",
-    "bundle",
-    "--sourcemap=linked",
-  ];
-  if (options.minify !== false) {
-    args.push("--minify");
+  const entry: Record<string, string> = {};
+  for (const path of entrypoints) {
+    entry[toEntryName(config.entry, path)] = path;
   }
-  const result = spawnSync("pnpm", args, {
-    cwd: config.root,
-    stdio: "inherit",
-  });
-  if (result.error) {
-    throw result.error;
-  }
-  if (result.status !== 0) {
-    throw new BuildFailedError(result.status ?? 1);
+  try {
+    await build({
+      config: false,
+      cwd: config.root,
+      entry,
+      outDir: options.outDir ?? config.outDir,
+      format: "esm",
+      platform: "node",
+      dts: false,
+      exports: false,
+      sourcemap: true,
+      minify: options.minify !== false,
+      clean: true,
+      hash: false,
+      fixedExtension: false,
+      deps: { onlyBundle: false },
+    });
+  } catch (error: unknown) {
+    throw new BuildFailedError(1, error);
   }
 }

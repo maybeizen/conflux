@@ -88,11 +88,13 @@
     "lint": "eslint src",
     "prepublishOnly": "pnpm run build"
   },
+  "dependencies": {
+    "tsdown": "catalog:build"
+  },
   "devDependencies": {
     "@confluxjs/tsconfig": "workspace:*",
     "@fluxerjs/core": "catalog:",
     "@types/node": "^22.20.1",
-    "tsdown": "catalog:build",
     "typescript": "catalog:build"
   },
   "peerDependencies": {
