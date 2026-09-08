@@ -59,12 +59,11 @@ export async function buildBotProject(options: BuildBotOptions = {}): Promise<vo
       platform: "node",
       dts: false,
       exports: false,
-      sourcemap: true,
+      sourcemap: options.minify === false,
       minify: options.minify !== false,
       clean: true,
       hash: false,
       fixedExtension: false,
-      deps: { onlyBundle: false },
     });
   } catch (error: unknown) {
     throw new BuildFailedError(1, error);

@@ -48,7 +48,7 @@
     "build": "tsdown",
     "check-types": "tsc -p tsconfig.json --noEmit",
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
-    "dev": "tsdown --watch",
+    "dev": "NODE_ENV=development tsdown --watch",
     "lint": "eslint src",
     "prepublishOnly": "pnpm run build"
   },
