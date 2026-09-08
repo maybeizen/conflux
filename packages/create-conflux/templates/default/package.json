@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@confluxjs/conflux": "latest",
-    "@fluxerjs/core": "^2.1.0"
+    "@fluxerjs/core": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
