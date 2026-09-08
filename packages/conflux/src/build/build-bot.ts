@@ -30,9 +30,7 @@ export class BuildFailedError extends Error {
 }
 
 function toEntryName(entryFile: string, sourcePath: string): string {
-  return relative(dirname(entryFile), sourcePath)
-    .replaceAll("\\", "/")
-    .replace(SOURCE_EXT, "");
+  return relative(dirname(entryFile), sourcePath).replaceAll("\\", "/").replace(SOURCE_EXT, "");
 }
 
 export async function buildBotProject(options: BuildBotOptions = {}): Promise<void> {
