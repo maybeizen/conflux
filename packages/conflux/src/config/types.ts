@@ -1,3 +1,10 @@
+import type { Options } from "tsdown";
+
+export type ConfluxTsdownOptions = Omit<
+  Options,
+  "config" | "configLoader" | "cwd" | "entry" | "filter" | "outDir" | "watch"
+>;
+
 export type ConfluxUserConfig = {
   root?: string;
   outDir?: string;
@@ -7,6 +14,7 @@ export type ConfluxUserConfig = {
   token?: string;
   env?: string;
   prefix?: string | string[];
+  tsdown?: ConfluxTsdownOptions;
 };
 
 export type ResolvedConfluxConfig = {
@@ -18,6 +26,7 @@ export type ResolvedConfluxConfig = {
   token?: string;
   env?: string;
   prefix: string[];
+  tsdown?: ConfluxTsdownOptions;
 };
 
 export type ConfluxOptions = {

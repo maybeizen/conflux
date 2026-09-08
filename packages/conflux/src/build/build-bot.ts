@@ -5,6 +5,7 @@ import { loadCommandRegistry } from "../commands/load-registry.js";
 import { loadConfluxConfig } from "../config/load-config.js";
 import { collectCommandTreeModulePaths } from "../loader/command-paths.js";
 import { collectEventDirectoryModulePaths } from "../loader/directory-modules.js";
+import { mergeTsdownOptions } from "./merge-tsdown-options.js";
 
 const SOURCE_EXT = /\.(tsx?|mts|cts)$/i;
 
@@ -50,21 +51,28 @@ export async function buildBotProject(options: BuildBotOptions = {}): Promise<vo
     entry[toEntryName(config.entry, path)] = path;
   }
   try {
-    await build({
-      config: false,
-      cwd: config.root,
-      entry,
-      outDir: options.outDir ?? config.outDir,
-      format: "esm",
-      platform: "node",
-      dts: false,
-      exports: false,
-      sourcemap: options.minify === false,
-      minify: options.minify !== false,
-      clean: true,
-      hash: false,
-      fixedExtension: false,
-    });
+    await build(
+      mergeTsdownOptions(
+        {
+          format: "esm",
+          platform: "node",
+          dts: false,
+          exports: false,
+          sourcemap: options.minify === false,
+          minify: options.minify !== false,
+          clean: true,
+          hash: false,
+          fixedExtension: false,
+        },
+        config.tsdown,
+        {
+          config: false,
+          cwd: config.root,
+          entry,
+          outDir: options.outDir ?? config.outDir,
+        },
+      ),
+    );
   } catch (error: unknown) {
     throw new BuildFailedError(1, error);
   }

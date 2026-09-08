@@ -32,5 +32,6 @@ export function resolveConfluxConfig(
     token: config.token,
     env: config.env,
     prefix: resolvePrefixList(config.prefix),
+    tsdown: config.tsdown,
   };
 }
