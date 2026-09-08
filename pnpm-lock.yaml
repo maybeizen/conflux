@@ -83,6 +83,10 @@ importers:
         version: 3.3.11(typescript@5.9.3)
 
   packages/conflux:
+    dependencies:
+      tsdown:
+        specifier: catalog:build
+        version: 0.15.12(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@7.2.0)(typescript@5.9.3)
     devDependencies:
       '@confluxjs/tsconfig':
         specifier: workspace:*
@@ -93,9 +97,6 @@ importers:
       '@types/node':
         specifier: ^22.20.1
         version: 22.20.1
-      tsdown:
-        specifier: catalog:build
-        version: 0.15.12(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(supports-color@7.2.0)(typescript@5.9.3)
       typescript:
         specifier: catalog:build
         version: 5.9.3
