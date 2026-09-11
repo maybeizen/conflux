@@ -13,7 +13,15 @@ export async function scaffoldTemplate(targetDir: string, packageName: string): 
   });
   const packageJsonPath = join(targetDir, "package.json");
   const raw = await readFile(packageJsonPath, "utf8");
-  const pkg = JSON.parse(raw) as { name: string };
+  let pkg: { name?: unknown } & Record<string, unknown>;
+  try {
+    pkg = JSON.parse(raw) as { name?: unknown } & Record<string, unknown>;
+  } catch {
+    throw new Error(`Invalid package.json in template: ${packageJsonPath}`);
+  }
+  if (!pkg || typeof pkg !== "object" || Array.isArray(pkg)) {
+    throw new Error(`Invalid package.json in template: ${packageJsonPath}`);
+  }
   pkg.name = packageName;
   await writeFile(packageJsonPath, `${JSON.stringify(pkg, null, 2)}\n`, "utf8");
 }

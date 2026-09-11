@@ -2,9 +2,15 @@ import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
-const MODULE_EXTENSIONS = [".ts", ".js", ".mts", ".mjs", ".cjs"] as const;
+import { shouldSkipDirectory } from "./skip-dirs.js";
+
+const MODULE_EXTENSIONS = [".cts", ".cjs", ".mts", ".mjs", ".ts", ".js"] as const;
+const DECLARATION_MODULE = /\.d\.(ts|mts|cts)$/i;
 
 export function isLoadableModule(name: string): boolean {
+  if (name.startsWith(".") || DECLARATION_MODULE.test(name)) {
+    return false;
+  }
   return MODULE_EXTENSIONS.some((ext) => name.endsWith(ext));
 }
 
@@ -29,7 +35,7 @@ export function collectEventDirectoryModulePaths(dir: string): string[] {
   }
   const paths: string[] = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    if (!entry.isDirectory()) {
+    if (!entry.isDirectory() || shouldSkipDirectory(entry.name)) {
       continue;
     }
     const eventDir = join(dir, entry.name);
@@ -45,14 +51,6 @@ export function collectEventDirectoryModulePaths(dir: string): string[] {
 }
 
 export async function loadDirectoryModules(dir: string): Promise<void> {
-  if (!existsSync(dir)) {
-    return;
-  }
-  const entries = readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
-    if (!entry.isFile() || !isLoadableModule(entry.name)) {
-      continue;
-    }
-    await import(pathToFileURL(join(dir, entry.name)).href);
-  }
+  const paths = collectDirectoryModulePaths(dir);
+  await Promise.all(paths.map((filePath) => import(pathToFileURL(filePath).href)));
 }

@@ -21,7 +21,7 @@ export default defineConfig({
 });
 ```
 
-Multiple prefixes are supported. The bot tries each prefix in array order and uses the first match:
+Multiple prefixes are supported. Longer prefixes are matched first so `!!help` is not parsed as `!` plus `!help`:
 
 ```ts
 export default defineConfig({

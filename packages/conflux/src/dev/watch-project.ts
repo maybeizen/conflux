@@ -9,6 +9,7 @@ import { ensureDevBootstrap } from "./dev-bootstrap.js";
 import { resolveDevOutDir } from "./dev-out-dir.js";
 
 const RESTART_DEBOUNCE_MS = 250;
+const CHILD_STOP_TIMEOUT_MS = 5_000;
 
 function watchDirectory(
   path: string,
@@ -42,36 +43,57 @@ export async function runProjectDevWatch(root?: string): Promise<void> {
   const devOutDir = resolveDevOutDir(projectRoot);
   const watchers: ReturnType<typeof watch>[] = [];
   let child: ChildProcess | null = null;
+  let childExited: Promise<void> = Promise.resolve();
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
   let shuttingDown = false;
   let building = false;
   let rebuildQueued = false;
 
-  const stopChild = (): void => {
-    if (!child || child.killed) {
+  const stopChild = async (): Promise<void> => {
+    const current = child;
+    if (!current) {
+      await childExited;
       return;
     }
-    child.kill("SIGTERM");
     child = null;
+    if (current.exitCode !== null || current.signalCode !== null) {
+      await childExited;
+      return;
+    }
+    const exited = childExited;
+    current.kill("SIGTERM");
+    const killTimer = setTimeout(() => {
+      if (current.exitCode === null && current.signalCode === null) {
+        current.kill("SIGKILL");
+      }
+    }, CHILD_STOP_TIMEOUT_MS);
+    await exited;
+    clearTimeout(killTimer);
   };
 
   const startChild = (entryPath: string): void => {
-    stopChild();
-    child = spawn("pnpm", ["exec", "node", entryPath], {
+    const spawned = spawn(process.execPath, [entryPath], {
       cwd: projectRoot,
       stdio: "inherit",
       env: { ...process.env, NODE_ENV: "development" },
     });
-    child.on("exit", (code, signal) => {
-      if (shuttingDown) {
-        return;
-      }
-      if (signal === "SIGTERM") {
-        return;
-      }
-      if (code !== 0 && code !== null) {
-        process.exitCode = code;
-      }
+    child = spawned;
+    childExited = new Promise((resolve) => {
+      spawned.once("exit", (code, signal) => {
+        if (child === spawned) {
+          child = null;
+        }
+        if (
+          !shuttingDown &&
+          signal !== "SIGTERM" &&
+          signal !== "SIGKILL" &&
+          code !== 0 &&
+          code !== null
+        ) {
+          process.exitCode = code;
+        }
+        resolve();
+      });
     });
   };
 
@@ -93,7 +115,10 @@ export async function runProjectDevWatch(root?: string): Promise<void> {
         throw new Error(`Dev build missing entry in ${devOutDir}`);
       }
       const runnerPath = ensureDevBootstrap(projectRoot, built);
-      startChild(runnerPath);
+      await stopChild();
+      if (!shuttingDown) {
+        startChild(runnerPath);
+      }
     } catch (error: unknown) {
       if (error instanceof BuildFailedError) {
         console.error(
@@ -144,7 +169,11 @@ export async function runProjectDevWatch(root?: string): Promise<void> {
     for (const watcher of watchers) {
       watcher.close();
     }
-    stopChild();
+    const current = child;
+    child = null;
+    if (current && current.exitCode === null && current.signalCode === null) {
+      current.kill("SIGTERM");
+    }
     process.exit(0);
   };
 

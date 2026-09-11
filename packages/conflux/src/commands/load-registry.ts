@@ -2,6 +2,7 @@ import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { discoverCommandPaths, type DiscoveredCommandPaths } from "./discover-paths.js";
+import { resolveMiddlewareChain, type MiddlewareMaps } from "./resolve-middleware.js";
 import type {
   CommandData,
   CommandMiddleware,
@@ -17,7 +18,16 @@ function isCommandData(value: unknown): value is CommandData {
     return false;
   }
   const data = value as CommandData;
-  return typeof data.name === "string" && data.name.length > 0;
+  if (typeof data.name !== "string" || data.name.length === 0) {
+    return false;
+  }
+  if (data.aliases !== undefined && !Array.isArray(data.aliases)) {
+    return false;
+  }
+  if (data.guilds !== undefined && !Array.isArray(data.guilds)) {
+    return false;
+  }
+  return true;
 }
 
 function isMessageCommand(value: unknown): value is MessageCommand {
@@ -72,38 +82,47 @@ async function loadCommandFile(filePath: string): Promise<LoadedCommand> {
     data,
     message,
     after,
+    middleware: [],
   };
 }
 
-async function loadMiddlewareMaps(discovered: DiscoveredCommandPaths): Promise<{
-  globalMiddleware: CommandMiddleware | null;
-  directoryMiddleware: Map<string, CommandMiddleware>;
-  commandMiddleware: Map<string, CommandMiddleware>;
-}> {
-  const globalMiddleware =
+async function loadMiddlewareMaps(discovered: DiscoveredCommandPaths): Promise<MiddlewareMaps> {
+  const directoryEntries = [...discovered.directoryMiddlewarePaths];
+  const commandEntries = [...discovered.commandMiddlewarePaths];
+  const [globalMiddleware, directoryLoaded, commandLoaded] = await Promise.all([
     discovered.globalMiddlewarePaths.length === 1
-      ? await loadMiddlewareFile(discovered.globalMiddlewarePaths[0]!)
-      : null;
-  const directoryMiddleware = new Map<string, CommandMiddleware>();
-  for (const [dir, filePath] of discovered.directoryMiddlewarePaths) {
-    directoryMiddleware.set(dir, await loadMiddlewareFile(filePath));
-  }
-  const commandMiddleware = new Map<string, CommandMiddleware>();
-  for (const [key, filePath] of discovered.commandMiddlewarePaths) {
-    commandMiddleware.set(key, await loadMiddlewareFile(filePath));
-  }
-  return { globalMiddleware, directoryMiddleware, commandMiddleware };
+      ? loadMiddlewareFile(discovered.globalMiddlewarePaths[0]!)
+      : Promise.resolve(null),
+    Promise.all(
+      directoryEntries.map(
+        async ([dir, filePath]) => [dir, await loadMiddlewareFile(filePath)] as const,
+      ),
+    ),
+    Promise.all(
+      commandEntries.map(
+        async ([key, filePath]) => [key, await loadMiddlewareFile(filePath)] as const,
+      ),
+    ),
+  ]);
+  return {
+    globalMiddleware,
+    directoryMiddleware: new Map(directoryLoaded),
+    commandMiddleware: new Map(commandLoaded),
+  };
 }
 
 export async function loadCommandRegistry(commandsDir: string): Promise<CommandRegistry> {
   const discovered = discoverCommandPaths(commandsDir);
   validateDiscoveredMiddleware(discovered, commandsDir);
-  const commands: LoadedCommand[] = [];
-  for (const filePath of discovered.commandPaths) {
-    commands.push(await loadCommandFile(filePath));
-  }
-  validateCommandTriggers(commands);
-  const middleware = await loadMiddlewareMaps(discovered);
+  const [loadedCommands, middleware] = await Promise.all([
+    Promise.all(discovered.commandPaths.map(loadCommandFile)),
+    loadMiddlewareMaps(discovered),
+  ]);
+  validateCommandTriggers(loadedCommands);
+  const commands = loadedCommands.map((command) => ({
+    ...command,
+    middleware: resolveMiddlewareChain(middleware, command, commandsDir),
+  }));
   const byTrigger = new Map<string, LoadedCommand>();
   for (const command of commands) {
     byTrigger.set(command.data.name.toLowerCase(), command);

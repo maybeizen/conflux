@@ -1,5 +1,6 @@
 import type { Client } from "@fluxerjs/core";
 
+import { normalizePrefixList } from "../config/defaults.js";
 import type { ConfluxOptions } from "../config/types.js";
 import type { ConfluxErrorContext, ConfluxErrorHandler } from "../runtime/handle-error.js";
 import { defaultConfluxErrorHandler, invokeConfluxErrorHandler } from "../runtime/handle-error.js";
@@ -35,7 +36,8 @@ export class Conflux {
       return ["!"];
     }
     const result = await this.prefixResolver();
-    return Array.isArray(result) ? result : [result];
+    const normalized = normalizePrefixList(result);
+    return normalized.length > 0 ? normalized : ["!"];
   }
 }
 

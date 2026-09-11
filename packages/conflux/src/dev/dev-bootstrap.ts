@@ -11,7 +11,7 @@ export function ensureDevBootstrap(projectRoot: string, built: ResolvedConfluxCo
   const source = `import { runConflux } from "@confluxjs/conflux";
 
 await runConflux({
-  root: ${JSON.stringify(built.root)},
+  root: ${JSON.stringify(projectRoot)},
   entry: ${JSON.stringify(built.entry)},
   eventsDir: ${JSON.stringify(built.eventsDir)},
   commandsDir: ${JSON.stringify(built.commandsDir)},

@@ -1,26 +1,26 @@
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { CONFIG_FILENAMES, resolveConfluxConfig } from "./defaults.js";
 import type { ConfluxUserConfig, ResolvedConfluxConfig } from "./types.js";
 
-function isResolvedConfig(value: unknown): value is ResolvedConfluxConfig {
-  if (!value || typeof value !== "object") {
+function isPlainConfigObject(value: unknown): value is ConfluxUserConfig {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function isConfigFile(path: string): boolean {
+  try {
+    return statSync(path).isFile();
+  } catch {
     return false;
   }
-  const record = value as Record<string, unknown>;
-  return (
-    typeof record.root === "string" &&
-    typeof record.entry === "string" &&
-    typeof record.outDir === "string"
-  );
 }
 
 export function findConfigPath(root: string): string | null {
   for (const name of CONFIG_FILENAMES) {
     const path = join(root, name);
-    if (existsSync(path)) {
+    if (existsSync(path) && isConfigFile(path)) {
       return path;
     }
   }
@@ -34,15 +34,12 @@ export async function loadConfluxConfig(root: string): Promise<ResolvedConfluxCo
   }
   const imported = await import(pathToFileURL(configPath).href);
   const exported = imported.default ?? imported;
-  if (typeof exported === "function") {
-    const result = await exported();
-    if (isResolvedConfig(result)) {
-      return result;
-    }
-    return resolveConfluxConfig(result as ConfluxUserConfig, root);
+  const raw = typeof exported === "function" ? await exported() : exported;
+  if (raw === undefined) {
+    return resolveConfluxConfig({}, root);
   }
-  if (isResolvedConfig(exported)) {
-    return exported;
+  if (!isPlainConfigObject(raw)) {
+    throw new Error(`Conflux config must export an object: ${configPath}`);
   }
-  return resolveConfluxConfig(exported as ConfluxUserConfig, root);
+  return resolveConfluxConfig(raw, root);
 }

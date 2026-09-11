@@ -3,7 +3,7 @@ import type { ResolvedConfluxConfig } from "../config/types.js";
 export const TOKEN_ENV_CANDIDATES = ["FLUXER_BOT_TOKEN", "CONFLUX_BOT_TOKEN", "BOT_TOKEN"] as const;
 
 export function resolveBotToken(config: ResolvedConfluxConfig): string {
-  if (config.token) {
+  if (typeof config.token === "string" && config.token.length > 0) {
     return config.token;
   }
   if (config.env) {

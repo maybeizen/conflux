@@ -40,8 +40,10 @@ export async function assessOverwriteRisk(
   try {
     const targetStat = await stat(targetDir);
     targetExists = true;
-    isNonEmpty = !(await directoryIsEmpty(targetDir));
-    if (targetStat.isDirectory()) {
+    if (!targetStat.isDirectory()) {
+      isNonEmpty = true;
+    } else {
+      isNonEmpty = !(await directoryIsEmpty(targetDir));
       const templateFiles = await listTemplateRelativeFiles(templateRoot);
       for (const relPath of templateFiles) {
         try {

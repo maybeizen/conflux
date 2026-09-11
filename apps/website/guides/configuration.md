@@ -28,7 +28,7 @@ export default defineConfig({
 | `env`       | Name of an environment variable to read                               |
 | _(omitted)_ | Checks `FLUXER_BOT_TOKEN`, then `CONFLUX_BOT_TOKEN`, then `BOT_TOKEN` |
 
-Load variables from `.env` automatically in dev and start.
+Load variables from `.env` and `.env.local` automatically in dev and start. Shell environment variables are never overwritten. `.env.local` overrides `.env`.
 
 ## Paths
 
@@ -39,15 +39,17 @@ Load variables from `.env` automatically in dev and start.
 | `eventsDir`   | `src/events`   | Event handler folders         |
 | `outDir`      | `dist`         | Production bundle output      |
 
+Paths are resolved from the project root (`--root`, or the current working directory). `entry`, `commandsDir`, `eventsDir`, `outDir`, and a nested config `root` must stay inside that directory.
+
 ## Command prefix
 
 The `prefix` option controls which message prefixes trigger [prefix commands](/guides/commands#command-prefix).
 
-| Value      | Resolved behavior                       |
-| ---------- | --------------------------------------- |
-| Omitted    | `["!"]`                                 |
-| `string`   | Single prefix, for example `["!"]`      |
-| `string[]` | Multiple prefixes, tried in array order |
+| Value      | Resolved behavior                      |
+| ---------- | -------------------------------------- |
+| Omitted    | `["!"]`                                |
+| `string`   | Single prefix, for example `["!"]`     |
+| `string[]` | Multiple prefixes, longest match first |
 
 ```ts
 export default defineConfig({
@@ -58,6 +60,8 @@ export default defineConfig({
   prefix: ["!", "?"],
 });
 ```
+
+Empty prefixes are rejected. When several prefixes could match the same message, Conflux prefers the longest one (`!!` before `!`).
 
 At runtime, Conflux loads config prefixes first, then runs optional `configure(conflux)` from your entry module. If `configure` calls `conflux.setPrefix()`, that resolver replaces the config value for the rest of the process lifetime.
 

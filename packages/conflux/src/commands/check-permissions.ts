@@ -29,7 +29,7 @@ export async function checkCommandPermissions(
   }
   if (userPermissions?.length) {
     const member = await guild.members.resolve(message.author.id);
-    if (!memberHasPermissions(member.permissions, userPermissions)) {
+    if (!memberHasPermissions(member?.permissions, userPermissions)) {
       return false;
     }
   }

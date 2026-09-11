@@ -33,5 +33,12 @@ export async function invokeConfluxErrorHandler(
   error: unknown,
   context: ConfluxErrorContext,
 ): Promise<void> {
-  await handler(error, context);
+  try {
+    await handler(error, context);
+  } catch (handlerError) {
+    defaultConfluxErrorHandler(handlerError, context);
+    if (handler !== defaultConfluxErrorHandler) {
+      defaultConfluxErrorHandler(error, context);
+    }
+  }
 }

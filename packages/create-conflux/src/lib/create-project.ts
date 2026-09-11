@@ -1,5 +1,5 @@
 import { constants } from "node:fs";
-import { access, rm } from "node:fs/promises";
+import { access, stat } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 
 import * as p from "@clack/prompts";
@@ -63,11 +63,28 @@ export async function runCreateConflux(options: CreateConfluxOptions = {}): Prom
     return 1;
   }
 
-  const targetDir = resolve(baseCwd, directoryInput.trim());
+  const directoryValue = directoryInput.trim();
+  if (directoryValue.includes("\0")) {
+    p.log.error("Directory path contains invalid characters");
+    return 1;
+  }
+
+  const targetDir = resolve(baseCwd, directoryValue);
 
   const parentDir = dirname(targetDir);
   if (!(await pathExists(parentDir))) {
     p.log.error(`Parent directory does not exist: ${parentDir}`);
+    return 1;
+  }
+
+  let targetIsFile = false;
+  try {
+    targetIsFile = (await stat(targetDir)).isFile();
+  } catch {
+    targetIsFile = false;
+  }
+  if (targetIsFile) {
+    p.log.error(`Target exists and is a file, not a directory: ${targetDir}`);
     return 1;
   }
 
@@ -146,10 +163,6 @@ export async function runCreateConflux(options: CreateConfluxOptions = {}): Prom
   }
 
   try {
-    if (overwriteRisk.targetExists && overwriteRisk.isNonEmpty) {
-      await rm(targetDir, { recursive: true, force: true });
-    }
-
     await p.tasks([
       {
         title: "Copy project template",

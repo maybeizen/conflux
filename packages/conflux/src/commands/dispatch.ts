@@ -3,7 +3,6 @@ import { parsePrefixCommand } from "@fluxerjs/core";
 
 import type { Conflux } from "../core/conflux.js";
 import { checkCommandPermissions } from "./check-permissions.js";
-import { resolveMiddlewareChain } from "./resolve-middleware.js";
 import type { CommandContext, CommandMiddleware, CommandRegistry } from "./types.js";
 
 function parseWithPrefixes(
@@ -71,7 +70,6 @@ export async function dispatchPrefixCommand(
   client: Client,
   conflux: Conflux,
   registry: CommandRegistry,
-  commandsDir: string,
 ): Promise<void> {
   if (message.author.bot) {
     return;
@@ -105,7 +103,7 @@ export async function dispatchPrefixCommand(
     command.data,
   );
   const commandName = parsed.command;
-  const middlewares = resolveMiddlewareChain(registry, command, commandsDir);
+  const middlewares = command.middleware;
   const startedMiddleware: CommandMiddleware[] = [];
 
   try {

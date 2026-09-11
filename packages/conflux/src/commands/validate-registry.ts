@@ -17,8 +17,8 @@ export function validateCommandTriggers(commands: LoadedCommand[]): void {
   for (const command of commands) {
     const triggers = [command.data.name, ...(command.data.aliases ?? [])];
     for (const trigger of triggers) {
-      if (!trigger) {
-        throw new Error(`Command at ${command.filePath} has an empty trigger name or alias`);
+      if (typeof trigger !== "string" || trigger.trim().length === 0 || /\s/.test(trigger)) {
+        throw new Error(`Command at ${command.filePath} has an invalid trigger name or alias`);
       }
       const key = trigger.toLowerCase();
       const existing = triggerOwners.get(key);

@@ -2,6 +2,7 @@ import { existsSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 import { isLoadableModule } from "../loader/directory-modules.js";
+import { shouldSkipDirectory } from "../loader/skip-dirs.js";
 
 export type DiscoveredCommandPaths = {
   commandPaths: string[];
@@ -22,7 +23,12 @@ function classifyPlusFile(filePath: string, fileName: string, out: DiscoveredCom
     return;
   }
   if (base === "+middleware") {
-    out.directoryMiddlewarePaths.set(dirname(filePath), filePath);
+    const dir = dirname(filePath);
+    const existing = out.directoryMiddlewarePaths.get(dir);
+    if (existing) {
+      throw new Error(`Duplicate +middleware in ${dir}: ${existing} and ${filePath}`);
+    }
+    out.directoryMiddlewarePaths.set(dir, filePath);
     return;
   }
   if (base.startsWith("+") && base.endsWith(".middleware")) {
@@ -31,6 +37,12 @@ function classifyPlusFile(filePath: string, fileName: string, out: DiscoveredCom
       throw new Error(`Invalid command middleware file name: ${filePath}`);
     }
     const key = `${dirname(filePath)}\0${commandName}`;
+    const existing = out.commandMiddlewarePaths.get(key);
+    if (existing) {
+      throw new Error(
+        `Duplicate command middleware for "${commandName}": ${existing} and ${filePath}`,
+      );
+    }
     out.commandMiddlewarePaths.set(key, filePath);
     return;
   }
@@ -42,6 +54,9 @@ function walkDirectory(dir: string, out: DiscoveredCommandPaths): void {
   for (const entry of entries) {
     const entryPath = join(dir, entry.name);
     if (entry.isDirectory()) {
+      if (shouldSkipDirectory(entry.name)) {
+        continue;
+      }
       walkDirectory(entryPath, out);
       continue;
     }

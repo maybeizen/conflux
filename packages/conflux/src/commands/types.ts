@@ -37,6 +37,7 @@ export type LoadedCommand = {
   data: CommandData;
   message: MessageCommand;
   after?: MessageCommandAfter;
+  middleware: CommandMiddleware[];
 };
 
 export type CommandRegistry = {
