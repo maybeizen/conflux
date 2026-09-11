@@ -2,7 +2,7 @@ import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { discoverCommandPaths, type DiscoveredCommandPaths } from "./discover-paths.js";
-import { resolveMiddlewareChain, type MiddlewareMaps } from "./resolve-middleware.js";
+import { type MiddlewareMaps, resolveMiddlewareChain } from "./resolve-middleware.js";
 import type {
   CommandData,
   CommandMiddleware,

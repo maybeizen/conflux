@@ -1,7 +1,7 @@
-import type { Options } from "tsdown";
+import type { InlineConfig } from "tsdown";
 
 export type ConfluxTsdownOptions = Omit<
-  Options,
+  InlineConfig,
   "config" | "configLoader" | "cwd" | "entry" | "filter" | "outDir" | "watch"
 >;
 

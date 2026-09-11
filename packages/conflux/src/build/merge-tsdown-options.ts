@@ -1,4 +1,4 @@
-import type { Options } from "tsdown";
+import type { InlineConfig } from "tsdown";
 
 import type { ConfluxTsdownOptions } from "../config/types.js";
 
@@ -10,17 +10,17 @@ const RESERVED_TSDOWN_KEYS = [
   "filter",
   "outDir",
   "watch",
-] as const satisfies readonly (keyof Options)[];
+] as const satisfies readonly (keyof InlineConfig)[];
 
 export function mergeTsdownOptions(
-  defaults: Options,
+  defaults: InlineConfig,
   user: ConfluxTsdownOptions | undefined,
-  required: Pick<Options, "config" | "cwd" | "entry" | "outDir">,
-): Options {
+  required: Pick<InlineConfig, "config" | "cwd" | "entry" | "outDir">,
+): InlineConfig {
   if (!user) {
     return { ...defaults, ...required };
   }
-  const extra = { ...(user as Options) };
+  const extra = { ...(user as InlineConfig) };
   for (const key of RESERVED_TSDOWN_KEYS) {
     delete extra[key];
   }
