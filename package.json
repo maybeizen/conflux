@@ -20,7 +20,7 @@
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-vue": "^10.10.0",
+    "eslint-plugin-vue": "^10.11.0",
     "prettier": "^3.9.6",
     "prettier-plugin-packagejson": "^2.5.22",
     "turbo": "^2.10.12",
