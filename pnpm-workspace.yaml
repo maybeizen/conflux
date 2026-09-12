@@ -11,4 +11,4 @@ catalog:
 catalogs:
   build:
     typescript: "^5.9.3"
-    tsdown: "^0.15.12"
+    tsdown: "^0.23.0"
