@@ -1,0 +1,12 @@
+{
+  "name": "Conflux.js",
+  "user": "ubuntu",
+  "install": "bash .cursor/install.sh",
+  "terminals": [
+    {
+      "name": "docs-dev",
+      "command": "pnpm run --filter website dev --host 127.0.0.1 --port 5173"
+    }
+  ],
+  "ports": [{ "name": "docs", "port": 5173 }]
+}
